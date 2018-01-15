@@ -5,15 +5,13 @@ public class MensagemErro {
 	public static final String BUSCA_NAO_TEVE_RESULTADO = "Busca sem resultado";
 	
 	/**
-	 * CARRO
+	 * ENDERECO
 	 */
-	public static final String ERRO_CARRO_INVALIDO = "Carro informado é inválido, informe outro";
-	public static final String ERRO_CARRO_NAO_INFORMADO = "Carro não informado informado";
-	public static final String ERRO_DISPONIBILIDADE_CARRO = "Erro na verificação de disponibilidade do carro";
-	public static final String ERRO_AO_INSERIR_CARRO = "Erro ao inserir carro";
-	public static final String ERRO_AO_ATUALIZAR_CARRO = "Erro ao atualizar carro";
-	public static final String ERRO_PESQUISAR_CARRO = "Erro ao pesquisar carro";
-	public static final String PESQUISA_DE_CARRO_NAO_OBTEVE_RETORNO = "pesquisa de carro não obteve resultado";
+	public static final String ERRO_ENDERECO_PAIS = "Informe dados válidos para inserir endereço";
+	public static final String ERRO_ENDERECO_NAO_INFORMADO = "Endereço não informado informado";
+	public static final String ERRO_AO_INSERIR_ENDERECO = "Erro ao inserir Endereço";
+	public static final String ERRO_AO_ATUALIZAR_ENDERECO = "Erro ao atualizar Endereço";
+	public static final String ERRO_PESQUISAR_ENDERECO = "Erro ao pesquisar Endereço";
 
 	/**
 	 * USUARIO

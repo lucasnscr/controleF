@@ -5,124 +5,156 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import MensagensErro.MensagemErro;
+import dto.EnderecoDTO;
+import entity.Endereco;
 import entity.Usuario;
 import enums.Escolaridade;
 import enums.TipoDocumento;
+import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import repository.EnderecoRepository;
 import repository.UsuarioRepository;
 
 public class ValidacoesImpl {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+
 	public void validaLogin(String login) throws ValidacaoException {
-		Usuario usuario =  null;
+		Usuario usuario = null;
 		try {
-			if(!"".equals(login)) {
+			if (!"".equals(login)) {
 				usuario = usuarioRepository.findByLogin(login);
-				if(usuario != null) {
+				if (usuario != null) {
 					throw new ValidacaoException(MensagemErro.USER_JA_EXISTENTE);
 				}
-			}else {
+			} else {
 				throw new ValidacaoException(MensagemErro.USER_NAO_INFORMADO);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
-	public void validaEmail(String email, String confirmacaoEmail) throws ValidacaoException{
+
+	public void validaEmail(String email, String confirmacaoEmail) throws ValidacaoException {
 		Usuario usuario = null;
-		try{
-			if(!"".equals(email)) {
+		try {
+			if (!"".equals(email)) {
 				usuario = usuarioRepository.findByEmail(email);
-				if(usuario != null) {
-					throw new ValidacaoException(MensagemErro.EMAIL_JA_CADASTRADO); 
-				}else {
-					if(!"".equals(confirmacaoEmail)) {
-						if(!confirmacaoEmail.equals(email)) {
+				if (usuario != null) {
+					throw new ValidacaoException(MensagemErro.EMAIL_JA_CADASTRADO);
+				} else {
+					if (!"".equals(confirmacaoEmail)) {
+						if (!confirmacaoEmail.equals(email)) {
 							throw new ValidacaoException(MensagemErro.CONFIRMACAO_DE_EMAIL_INVALIDA);
 						}
-					}else {
+					} else {
 						throw new ValidacaoException(MensagemErro.CONFIRMACAO_DE_EMAIL_NAO_INFORMADA);
 					}
 				}
-			}else {
+			} else {
 				throw new ValidacaoException(MensagemErro.EMAIL_NAO_INFORMADO);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
+
 	public void validaSenha(String senha, String confirmaSenha) throws ValidacaoException {
 		try {
-			if(!"".equals(senha)) {
-				if(senha.length() <= 5 && senha.length() >= 13) {
+			if (!"".equals(senha)) {
+				if (senha.length() <= 5 && senha.length() >= 13) {
 					throw new ValidacaoException(MensagemErro.TAMANHO_DE_SENHA_INVALIDO);
 				}
-				if(!confirmaSenha.equals(senha)) {
+				if (!confirmaSenha.equals(senha)) {
 					throw new ValidacaoException(MensagemErro.ERRO_CONFIRMA_SENHA);
 				}
-			}else{
+			} else {
 				throw new ValidacaoException(MensagemErro.SENHA_NAO_INFORMADA);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
+
 	public void validaDocumento(TipoDocumento tipoDocumento, String documento) throws ValidacaoException {
 		try {
-			if(tipoDocumento.getValor() != 1 || tipoDocumento.getValor() != 2) {
+			if (tipoDocumento.getValor() != 1 || tipoDocumento.getValor() != 2) {
 				throw new ValidacaoException(MensagemErro.TIPO_DOCUMENTO_INVALIDO);
 			}
-			
-			if(1 == tipoDocumento.getValor()) {
-				if(!"".equals(documento) || (documento.length() > 11 || documento.length() < 9)) {
+
+			if (1 == tipoDocumento.getValor()) {
+				if (!"".equals(documento) || (documento.length() > 11 || documento.length() < 9)) {
 					throw new ValidacaoException(MensagemErro.CPF_INVALIDO);
 				}
-			}else {
-				if(documento.length() < 14) {
+			} else {
+				if (documento.length() < 14) {
 					throw new ValidacaoException(MensagemErro.CNPJ_INVALIDO);
 				}
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
+
 	public void validaTermoServico(Boolean termoServico) throws ValidacaoException {
-		if(!termoServico) {
+		if (!termoServico) {
 			throw new ValidacaoException(MensagemErro.TERMO_SERVICO_NAO_ASSINADO);
 		}
 	}
-	
+
 	public Long geraChave() {
 		Random gerador = new Random();
-	    long nextLong = gerador.nextLong();
-	    return nextLong;
+		long nextLong = gerador.nextLong();
+		return nextLong;
 	}
-	
+
 	public void validaUsuario(Long id) throws ValidacaoException {
 		try {
 			Usuario usuario = usuarioRepository.findById(id);
-			if(usuario == null) {
+			if (usuario == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INEXISTENTE);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
+
 	public void validaEscolaridade(Escolaridade escolaridade) throws ValidacaoException {
 		try {
-			if(escolaridade.getValor() > 10 && escolaridade.getValor() < 1) {
-			throw new ValidacaoException(MensagemErro.ESCOLARIDADE_INVALIDA);
+			if (escolaridade.getValor() > 10 && escolaridade.getValor() < 1) {
+				throw new ValidacaoException(MensagemErro.ESCOLARIDADE_INVALIDA);
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
+	public void validaEndereco(EnderecoDTO endercoDTO) throws ValidacaoException, ServicoException {
+
+		try {
+			if ("".equals(endercoDTO.getLogradouro()) || "".equals(endercoDTO.getBairro())
+					|| "".equals(endercoDTO.getCidade()) || "".equals(endercoDTO.getPais())) {
+				throw new ValidacaoException(MensagemErro.ERRO_ENDERECO_PAIS);
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
+	public void enderecoJaExiste(Long id) throws ValidacaoException {
+		try {
+			Endereco endereco = enderecoRepository.findById(id);
+			if (endereco == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_ENDERECO);
+			}
+
+		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
