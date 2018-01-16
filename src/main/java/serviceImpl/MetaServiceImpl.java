@@ -1,0 +1,132 @@
+package serviceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import MensagensErro.MensagemErro;
+import dto.MetaDTO;
+import entity.Meta;
+import enums.FlagAtivo;
+import exceptions.ServicoException;
+import exceptions.ValidacaoException;
+import repository.MetaRepository;
+import service.MetaService;
+import validacoes.ValidacoesImpl;
+
+public class MetaServiceImpl implements MetaService {
+
+	@Autowired
+	private MetaRepository metaRepository;
+	
+	@Autowired
+	private ValidacoesImpl validacoes;
+	
+	@Override
+	public MetaDTO incluir(MetaDTO metaDTO) throws ValidacaoException, ServicoException {
+		try {
+			validacoes.validaUsuario(metaDTO.getUsuario().getId());
+			validacoes.validaMeta(metaDTO);
+			Meta meta =  null;
+			BeanUtils.copyProperties(metaDTO, meta);
+			Meta metaSave = metaRepository.save(meta);
+			if(metaSave != null) {
+				BeanUtils.copyProperties(metaSave, metaDTO);
+				return metaDTO;
+			}else {
+				throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_META);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public MetaDTO alterar(MetaDTO metaDTO) throws ValidacaoException, ServicoException {
+		try {
+			validacoes.validaUsuario(metaDTO.getUsuario().getId());
+			validacoes.validaMeta(metaDTO);
+			Meta meta =  metaRepository.findById(metaDTO.getId());
+			if(meta != null) {
+				BeanUtils.copyProperties(metaDTO, meta);
+				Meta metaSave = metaRepository.save(meta);
+				if(metaSave != null) {
+					BeanUtils.copyProperties(metaSave, metaDTO);
+					return metaDTO;
+				}else {
+					throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_META);
+				}
+			}else{
+				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_META);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public MetaDTO inativar(Long id) throws ValidacaoException, ServicoException {
+		try {
+			Meta meta = metaRepository.findById(id);
+			if(meta != null) {
+				meta.setAtivo(FlagAtivo.INATIVO.getValor());
+				Meta metaSave = metaRepository.save(meta);
+				if(metaSave != null) {
+					MetaDTO metaDTO =  null;
+					BeanUtils.copyProperties(meta, metaDTO);
+					return metaDTO;
+				}else {
+					throw new ServicoException(MensagemErro.ERRO_AO_INATIVAR_META);
+				}
+			}else {
+				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_META);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<MetaDTO> pesquisarMeta(Long idUsuario) throws ValidacaoException, ServicoException {
+		try {
+			List<Meta> pesquisaMeta = metaRepository.findByIdUsuario(idUsuario);
+			if(CollectionUtils.isNotEmpty(pesquisaMeta)) {
+				List<MetaDTO> metasDTO =  new ArrayList<>();
+				for (Meta meta : pesquisaMeta) {
+					MetaDTO metaDTO =  new MetaDTO();
+					BeanUtils.copyProperties(meta, metaDTO);
+					metasDTO.add(metaDTO);
+				}
+				return metasDTO;
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public MetaDTO detalheMeta(Long id) throws ValidacaoException, ServicoException {
+		try {
+			Meta meta = metaRepository.findById(id);
+			if(meta != null) {
+				MetaDTO metaDTO = null;
+				BeanUtils.copyProperties(meta, metaDTO);
+				return metaDTO;
+			}else {
+				throw new ServicoException(MensagemErro.ERRO_PESQUISAR_META);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+}

@@ -27,8 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public CadastroUsuarioDTO incluir(CadastroUsuarioDTO cadUsuarioDTO) throws ServicoException {
-		Usuario usuario = new Usuario();
 		try {
+			Usuario usuario = new Usuario();
+
 			validacoes.validaLogin(cadUsuarioDTO.getLogin());
 			validacoes.validaEmail(cadUsuarioDTO.getEmail(), cadUsuarioDTO.getEmailConfirmacao());
 			validacoes.validaSenha(cadUsuarioDTO.getSenha(), cadUsuarioDTO.getConfirmaSenha());
@@ -173,10 +174,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 						if (usuSenhaNova != null) {
 							BeanUtils.copyProperties(usuSenhaNova, gerenciarUsuarioDTO);
 							return gerenciarUsuarioDTO;
-						}else {
+						} else {
 							throw new ServicoException(MensagemErro.ALTERACAO_SENHA_INVALIDA);
 						}
-					}else {
+					} else {
 						throw new ValidacaoException(MensagemErro.ALTERACAO_SENHA_INVALIDA);
 					}
 				} else {

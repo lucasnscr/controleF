@@ -14,6 +14,18 @@ public class MensagemErro {
 	public static final String ERRO_PESQUISAR_ENDERECO = "Erro ao pesquisar Endereço";
 
 	/**
+	 * TELEFONE
+	 */
+	public static final String ERRO_TELEFONE_USUARIO = "Informe dados usuário para cadastrar telefone";
+	public static final String ERRO_TELEFONE_CODIGO_PAIS = "Código do país inválido para o telefone";
+	public static final String ERRO_TELEFONE_DDD = "DDD inválido para o telefone";
+	public static final String ERRO_TELEFONE_NUMERO = "DDD inválido para o telefone";
+	public static final String ERRO_TELEFONE_INSERIR = "Erro ao inserir telefone";
+	public static final String ERRO_TELEFONE_ATUALIZAR = "Erro ao atualizar telefone";
+	public static final String BUSCA_TELEFONE_SEM_RESULTADO = "Busca sem resultado";
+	
+	
+	/**
 	 * USUARIO
 	 */
 	public static final String ERRO_USUARIO_INEXISTENTE = "Cliente informado não tem cadastro no ControleF";
@@ -41,13 +53,18 @@ public class MensagemErro {
 	
 	
 	/**
-	 * PEDIDO
+	 * META
 	 */
-	public static final String ERRO_DATA_PEDIDO = "data fim do pedido é menor que data inicio";
-	public static final String ERRO_NA_PESQUISA_PEDIDO_POR_ID = "Erro ao pesquisar pedido por id";
-	public static final String ERRO_NA_PESQUISA_PEDIDO = "Erro ao pesquisar pedido";
-	public static final String ERRO_ALTERA_PEDIDO = "Erro ao alterar pedido";
-	public static final String ERRO_CANCELAR_PEDIDO = "Erro ao cancelar pedido";
+	public static final String ERRO_AO_INSERIR_META = "Erro ao inserir meta";
+	public static final String ERRO_AO_ATUALIZAR_META  = "Erro ao atualizar meta";
+	public static final String ERRO_AO_INATIVAR_META  = "Erro ao inativar meta";
+	public static final String ERRO_PESQUISAR_META  = "Erro ao pesquisar meta";
+	public static final String ERRO_USUARIO_META  = "Informe um usuário vinculado a meta";
+	public static final String ERRO_DT_INICIO_META  = "Informe uma data de início a meta";
+	public static final String ERRO_DT_FIM_META  = "Informe uma data de fim a vinculado a meta";
+	public static final String ERRO_VALOR_META  = "Informe um valor a meta";
+	
+
 	
 	/**
 	 * Administrador

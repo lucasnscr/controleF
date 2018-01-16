@@ -81,12 +81,12 @@ public class EnderecoServiceImpl implements EnderecoService {
 	@Override
 	public EnderecoDTO inativar(Long id) throws ValidacaoException, ServicoException {
 		try {
-			EnderecoDTO enderecoDTO = null;
 			Endereco endereco = enderecoRepository.findById(id);
 			if(endereco !=null) {
 				endereco.setAtivo(FlagAtivo.INATIVO.getValor());
 				Endereco enderecoSave = enderecoRepository.save(endereco);
 				if(enderecoSave != null) {
+					EnderecoDTO enderecoDTO = null;
 					BeanUtils.copyProperties(enderecoSave, enderecoDTO);
 					return enderecoDTO;
 				}else {
@@ -103,11 +103,11 @@ public class EnderecoServiceImpl implements EnderecoService {
 
 	@Override
 	public List<EnderecoDTO> listarEnderecoUsuario(Long idUsuario) throws ValidacaoException, ServicoException {
-		List<EnderecoDTO> enderecosDTO = new ArrayList<>();
 		try {
 			validacao.validaUsuario(idUsuario);
 			List<Endereco> enderecos = enderecoRepository.findByIdUsuarioAndAtivo(idUsuario, FlagAtivo.ATIVO.getValor());
 			if(CollectionUtils.isNotEmpty(enderecos)) {
+				List<EnderecoDTO> enderecosDTO = new ArrayList<>();
 				for (Endereco endereco : enderecos) {
 					EnderecoDTO enderecoDTO =  new EnderecoDTO();
 					BeanUtils.copyProperties(endereco, enderecoDTO);
@@ -126,10 +126,10 @@ public class EnderecoServiceImpl implements EnderecoService {
 
 	@Override
 	public EnderecoDTO detalharEndereco(Long id) throws ValidacaoException, ServicoException {
-		EnderecoDTO enderecoDTO = new EnderecoDTO();
 		try {
 			Endereco endereco = enderecoRepository.findById(id);
 			if(endereco != null) {
+				EnderecoDTO enderecoDTO = null;
 				BeanUtils.copyProperties(endereco, enderecoDTO);
 				return enderecoDTO;
 			}else {

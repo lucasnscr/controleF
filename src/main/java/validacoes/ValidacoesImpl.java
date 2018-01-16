@@ -1,11 +1,14 @@
 package validacoes;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import MensagensErro.MensagemErro;
 import dto.EnderecoDTO;
+import dto.MetaDTO;
+import dto.TelefoneDTO;
 import entity.Endereco;
 import entity.Usuario;
 import enums.Escolaridade;
@@ -24,10 +27,9 @@ public class ValidacoesImpl {
 	private EnderecoRepository enderecoRepository;
 
 	public void validaLogin(String login) throws ValidacaoException {
-		Usuario usuario = null;
 		try {
 			if (!"".equals(login)) {
-				usuario = usuarioRepository.findByLogin(login);
+				Usuario usuario = usuarioRepository.findByLogin(login);
 				if (usuario != null) {
 					throw new ValidacaoException(MensagemErro.USER_JA_EXISTENTE);
 				}
@@ -40,10 +42,9 @@ public class ValidacoesImpl {
 	}
 
 	public void validaEmail(String email, String confirmacaoEmail) throws ValidacaoException {
-		Usuario usuario = null;
 		try {
 			if (!"".equals(email)) {
-				usuario = usuarioRepository.findByEmail(email);
+				Usuario usuario = usuarioRepository.findByEmail(email);
 				if (usuario != null) {
 					throw new ValidacaoException(MensagemErro.EMAIL_JA_CADASTRADO);
 				} else {
@@ -158,5 +159,64 @@ public class ValidacoesImpl {
 			e.getMessage();
 		}
 	}
+
+	public void validaTelefone(TelefoneDTO telefoneDTO) throws ValidacaoException {
+		try {
+			if (null == telefoneDTO.getUsuario().getId()) {
+				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_USUARIO);
+
+			}
+
+			if (null == telefoneDTO.getCodigoPais()) {
+				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_CODIGO_PAIS);
+
+			}
+
+			if (null == telefoneDTO.getDdd() && telefoneDTO.getDdd() < 2) {
+				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_DDD);
+
+			}
+
+			if (null == telefoneDTO.getUsuario() && telefoneDTO.getNumero() < 6) {
+				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_USUARIO);
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
+	public void validaMeta(MetaDTO metaDTO) throws ValidacaoException {
+		try {
+			if (metaDTO.getUsuario().getId() != null) {
+				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_META);
+			}
+
+			if (metaDTO.getDataInicio() != null) {
+				throw new ValidacaoException(MensagemErro.ERRO_DT_INICIO_META);
+			}
+
+			if (metaDTO.getDataFinal() != null) {
+				throw new ValidacaoException(MensagemErro.ERRO_DT_FIM_META);
+			}
+
+			if (metaDTO.getValor() != null) {
+				throw new ValidacaoException(MensagemErro.ERRO_VALOR_META);
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+	
+	public Boolean validaData(LocalDate inicio, LocalDate fim)throws ValidacaoException{
+		Boolean dataValida = null;
+		if (fim.isAfter(inicio)) {
+			dataValida = true;
+		} else {
+			dataValida = false;
+		}
+		return dataValida;
+    }
 
 }

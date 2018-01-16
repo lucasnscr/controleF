@@ -1,52 +1,41 @@
-package entity;
+package dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@SequenceGenerator(name = "META_SEQ", sequenceName = "META_SEQ", initialValue = 1, allocationSize = 1)
-@Entity(name="meta")
-public class Meta implements Serializable {
+import entity.Usuario;
+import enums.FlagAtivo;
+
+public class MetaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "META_SEQ")
 	private Long id;
 	
-	@Column(name="id_usuario", nullable=false)
+	@NotNull
 	private Usuario usuario;
 	
-	@Column(nullable=true)
+	@Size(min =1, max= 200)
 	private String descricao;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_inicial", nullable=false)
-	private Date dataInicial;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_final", nullable=false)
+	@NotNull
+	private Date dataInicio;
+
+	@NotNull
 	private Date dataFinal;
 	
-	@Column(nullable=false)
+	@NotNull
 	private Double valor;
 	
-	@Column(nullable=true)
+	@NotNull
 	private Double saldo;
 	
-	@Column(nullable=false)
 	private Double investimentoMensal;
 	
-	@Column(nullable=false)
-	private Integer ativo;
+	private FlagAtivo ativo;
 
 	public Long getId() {
 		return id;
@@ -72,12 +61,12 @@ public class Meta implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInicial() {
-		return dataInicial;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 	public Date getDataFinal() {
@@ -112,13 +101,12 @@ public class Meta implements Serializable {
 		this.investimentoMensal = investimentoMensal;
 	}
 
-	public Integer getAtivo() {
+	public FlagAtivo getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Integer ativo) {
+	public void setAtivo(FlagAtivo ativo) {
 		this.ativo = ativo;
 	}
-	
 	
 }

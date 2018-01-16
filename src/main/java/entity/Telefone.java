@@ -9,11 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 @SequenceGenerator(name = "TELEFONE_SEQ", sequenceName = "TELEFONE_SEQ", initialValue = 1, allocationSize = 1)
 @Entity(name="telefone")
 public class Telefone implements Serializable {
@@ -39,4 +34,52 @@ public class Telefone implements Serializable {
 	@Column(nullable= false)
 	private Integer ativo;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Long getCodigoPais() {
+		return codigoPais;
+	}
+
+	public void setCodigoPais(Long codigoPais) {
+		this.codigoPais = codigoPais;
+	}
+
+	public Long getDdd() {
+		return ddd;
+	}
+
+	public void setDdd(Long ddd) {
+		this.ddd = ddd;
+	}
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
+
+	public Integer getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
+	}
+	
 }
