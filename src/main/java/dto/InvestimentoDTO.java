@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import entity.Usuario;
 import enums.FlagAtivo;
+import enums.Rentabilidade;
 import enums.TipoInvestimento;
 
 public class InvestimentoDTO implements Serializable {
@@ -33,6 +34,10 @@ public class InvestimentoDTO implements Serializable {
 	private Double rendaMensal;
 	
 	private Double investimentoNecessario;
+	
+	private Rentabilidade rentabilidade;
+	
+	private String tipoInvestidor;
 
 	public Long getId() {
 		return id;
@@ -105,5 +110,22 @@ public class InvestimentoDTO implements Serializable {
 	public void setInvestimentoNecessario(Double investimentoNecessario) {
 		this.investimentoNecessario = investimentoNecessario;
 	}
+
+	public Rentabilidade getRentabilidade() {
+		return rentabilidade;
+	}
+
+	public void setRentabilidade(Rentabilidade rentabilidade) {
+		this.rentabilidade = rentabilidade;
+	}
+
+	public String getTipoInvestidor() {
+		return tipoInvestidor;
+	}
+
+	public void setTipoInvestidor(String tipoInvestidor) {
+		this.tipoInvestidor = tipoInvestidor;
+	}
+	
 	
 }

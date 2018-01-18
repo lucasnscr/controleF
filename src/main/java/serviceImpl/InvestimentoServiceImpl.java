@@ -175,14 +175,24 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 	public InvestimentoDTO simularInvestimento(InvestimentoDTO investimentoDTO)
 			throws ServicoException, ValidacaoException {
 		try {
-			Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
-			TipoInvestimento tipoInvestimento = investimentoDTO.getTipoInvestimento();
-			if(rendaMensalDesejada != null && tipoInvestimento !=  null) {
-				Double valorAcumulado =  (rendaMensalDesejada * 12) / tipoInvestimento.getValor();
-				investimentoDTO.setInvestimentoNecessario(valorAcumulado);
-				return investimentoDTO;
-			}else {
-				throw new ValidacaoException(MensagemErro.INVESTIMENTO_MENSAL);
+			
+			String tipoInvestidor = investimentoDTO.getTipoInvestidor();
+			if(!tipoInvestidor.equals(null)) {
+				switch (tipoInvestidor) {
+				case "RendaMensal":
+					Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
+					TipoInvestimento tipoInvestimento = investimentoDTO.getTipoInvestimento();
+					if(rendaMensalDesejada != null && tipoInvestimento !=  null) {
+						Double valorAcumulado =  (rendaMensalDesejada * 12) / tipoInvestimento.getValor();
+						investimentoDTO.setInvestimentoNecessario(valorAcumulado);
+						return investimentoDTO;
+					}else {
+						throw new ValidacaoException(MensagemErro.INVESTIMENTO_MENSAL);
+					}
+				case "":
+				default:
+					break;
+				}
 			}
 		} catch (Exception e) {
 			e.getMessage();
