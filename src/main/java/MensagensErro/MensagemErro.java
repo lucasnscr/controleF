@@ -64,8 +64,8 @@ public class MensagemErro {
 	
 	public static final String ERRO_USUARIO_INVESTIMENTO = "Informe um usuário vinculado ao investimento";
 	public static final String ERRO_VALOR_INVESTIMENTO = "Informe um valor para investimento";
-	public static final String ERRO_TIPO_INVESTIMENTO = "Informe um tipo de investimento";
 	public static final String ERRO_DATA_FIM_INVESTIMENTO = "Informe uma data para o resgate do investimento";
 	public static final String INVESTIMENTO = "Investimento";
+	public static final String INVESTIMENTO_MENSAL = "Informe investimento mensal desejado";
 
 }

@@ -18,6 +18,8 @@ public interface InvestimentoService {
 
 	InvestimentoDTO detalharInvestimento(Long id) throws ServicoException, ValidacaoException;
 
-	InvestimentoDTO simularInvestimento(InvestimentoDTO investimentoDTO) throws ServicoException, ValidacaoException;
+	InvestimentoDTO simularInvestimento(InvestimentoDTO investimentoDTO) throws ServicoException, ValidacaoException;;
+	
+	
 
 }

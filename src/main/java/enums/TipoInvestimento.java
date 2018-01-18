@@ -2,8 +2,10 @@ package enums;
 
 public enum TipoInvestimento {
 	
-	POUPANCA(1),
-	RENDA_FIXA(2);
+	CONSERVADOR(4),
+	MEDIO(6),
+	MEDIO2(8),
+	AGRESSIVO(10);
 	
 	private Integer valor;
 	

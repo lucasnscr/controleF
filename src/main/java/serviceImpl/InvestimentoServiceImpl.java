@@ -16,11 +16,19 @@ import MensagensErro.MensagemErro;
 import dto.InvestimentoDTO;
 import entity.Investimento;
 import enums.FlagAtivo;
+import enums.TipoInvestimento;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import repository.InvestimentoRepository;
 import service.InvestimentoService;
 import validacoes.ValidacoesImpl;
+
+/**
+ * 
+ * @author lucasnscr
+ * CRUD de investimento e realização de cálculos
+ *
+ */
 
 public class InvestimentoServiceImpl implements InvestimentoService {
 
@@ -166,7 +174,20 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 	@Override
 	public InvestimentoDTO simularInvestimento(InvestimentoDTO investimentoDTO)
 			throws ServicoException, ValidacaoException {
-		// TODO Auto-generated method stub
+		try {
+			Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
+			TipoInvestimento tipoInvestimento = investimentoDTO.getTipoInvestimento();
+			if(rendaMensalDesejada != null && tipoInvestimento !=  null) {
+				Double valorAcumulado =  (rendaMensalDesejada * 12) / tipoInvestimento.getValor();
+				investimentoDTO.setInvestimentoNecessario(valorAcumulado);
+				return investimentoDTO;
+			}else {
+				throw new ValidacaoException(MensagemErro.INVESTIMENTO_MENSAL);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		
 		return null;
 	}
 	

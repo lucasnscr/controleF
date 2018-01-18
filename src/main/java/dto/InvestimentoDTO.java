@@ -21,7 +21,6 @@ public class InvestimentoDTO implements Serializable {
 	@NotNull(message="Informe uma valor que deseja investir")
 	private Double valor;
 
-	@NotNull(message="Informe o seu tipo de investimento")
 	private TipoInvestimento tipoInvestimento;
 
 	private Date inicio;
@@ -30,6 +29,10 @@ public class InvestimentoDTO implements Serializable {
 	private Date fim;
 
 	private FlagAtivo ativo;
+
+	private Double rendaMensal;
+	
+	private Double investimentoNecessario;
 
 	public Long getId() {
 		return id;
@@ -85,6 +88,22 @@ public class InvestimentoDTO implements Serializable {
 
 	public void setAtivo(FlagAtivo ativo) {
 		this.ativo = ativo;
+	}
+
+	public Double getRendaMensal() {
+		return rendaMensal;
+	}
+
+	public void setRendaMensal(Double rendaMensal) {
+		this.rendaMensal = rendaMensal;
+	}
+
+	public Double getInvestimentoNecessario() {
+		return investimentoNecessario;
+	}
+
+	public void setInvestimentoNecessario(Double investimentoNecessario) {
+		this.investimentoNecessario = investimentoNecessario;
 	}
 	
 }

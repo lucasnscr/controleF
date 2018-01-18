@@ -230,10 +230,6 @@ public class ValidacoesImpl {
 			throw new ValidacaoException(MensagemErro.ERRO_VALOR_INVESTIMENTO);
 		}
 		
-		if(investimentoDTO.getTipoInvestimento() == null) {
-			throw new ValidacaoException(MensagemErro.ERRO_TIPO_INVESTIMENTO);
-		}
-		
 		if(investimentoDTO.getFim() == null) {
 			throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
 		}
