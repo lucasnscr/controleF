@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import MensagensErro.MensagemErro;
 import dto.EnderecoDTO;
+import dto.InvestimentoDTO;
 import dto.MetaDTO;
 import dto.TelefoneDTO;
 import entity.Endereco;
@@ -140,7 +141,7 @@ public class ValidacoesImpl {
 		try {
 			if ("".equals(endercoDTO.getLogradouro()) || "".equals(endercoDTO.getBairro())
 					|| "".equals(endercoDTO.getCidade()) || "".equals(endercoDTO.getPais())) {
-				throw new ValidacaoException(MensagemErro.ERRO_ENDERECO_PAIS);
+				throw new ValidacaoException(MensagemErro.ERRO_ENDERECO_DADOS);
 			}
 
 		} catch (Exception e) {
@@ -152,7 +153,7 @@ public class ValidacoesImpl {
 		try {
 			Endereco endereco = enderecoRepository.findById(id);
 			if (endereco == null) {
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_ENDERECO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 
 		} catch (Exception e) {
@@ -218,5 +219,24 @@ public class ValidacoesImpl {
 		}
 		return dataValida;
     }
+	
+	public void ValidaInvestimento(InvestimentoDTO investimentoDTO) throws ValidacaoException{
+		
+		if(investimentoDTO.getUsuario().getId() == null) {
+			throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INVESTIMENTO);
+		}
+		
+		if(investimentoDTO.getValor() ==  null) {
+			throw new ValidacaoException(MensagemErro.ERRO_VALOR_INVESTIMENTO);
+		}
+		
+		if(investimentoDTO.getTipoInvestimento() == null) {
+			throw new ValidacaoException(MensagemErro.ERRO_TIPO_INVESTIMENTO);
+		}
+		
+		if(investimentoDTO.getFim() == null) {
+			throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
+		}
+	}
 
 }

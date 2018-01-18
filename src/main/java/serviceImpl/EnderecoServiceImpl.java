@@ -47,7 +47,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 				BeanUtils.copyProperties(enderecoSave, enderecoDTO);
 				return enderecoDTO;
 			}else {
-				throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_ENDERECO);
+				throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.ENDERECO));
 			}
 		
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 					BeanUtils.copyProperties(enderecoSave, enderecoDTO);
 					return enderecoDTO;
 				}else {
-					throw new ServicoException(MensagemErro.ERRO_AO_ATUALIZAR_ENDERECO);
+					throw new ServicoException(MensagemErro.ERRO_ATUALIZAR.concat(MensagemErro.ENDERECO));
 				}
 			}
 		} catch (Exception e) {
@@ -90,10 +90,10 @@ public class EnderecoServiceImpl implements EnderecoService {
 					BeanUtils.copyProperties(enderecoSave, enderecoDTO);
 					return enderecoDTO;
 				}else {
-					throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_ENDERECO);
+					throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.ENDERECO));
 				}
 			}else{
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_ENDERECO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -115,7 +115,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 				}
 				
 			}else{
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_ENDERECO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 			
 		} catch (Exception e) {
@@ -133,7 +133,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 				BeanUtils.copyProperties(endereco, enderecoDTO);
 				return enderecoDTO;
 			}else {
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_ENDERECO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();

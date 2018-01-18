@@ -35,6 +35,15 @@ public class MetaServiceImpl implements MetaService {
 		try {
 			validacoes.validaUsuario(metaDTO.getUsuario().getId());
 			validacoes.validaMeta(metaDTO);
+			
+			LocalDate inicio = toLocalDate(metaDTO.getDataInicio());
+			LocalDate fim = toLocalDate(metaDTO.getDataFinal());
+			
+			Boolean validaData = validacoes.validaData(inicio, fim);
+			if(!validaData) {
+				throw new ValidacaoException(MensagemErro.ERRO_DATA_MENOR);
+			}
+			
 			Meta meta =  null;
 			BeanUtils.copyProperties(metaDTO, meta);
 			Meta metaSave = metaRepository.save(meta);
@@ -42,7 +51,7 @@ public class MetaServiceImpl implements MetaService {
 				BeanUtils.copyProperties(metaSave, metaDTO);
 				return metaDTO;
 			}else {
-				throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_META);
+				throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.META));
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -55,7 +64,14 @@ public class MetaServiceImpl implements MetaService {
 		try {
 			validacoes.validaUsuario(metaDTO.getUsuario().getId());
 			validacoes.validaMeta(metaDTO);
-			validacoes.validaData(metaDTO.getDataInicio()., metaDTO.getDataFinal());
+			
+			LocalDate inicio = toLocalDate(metaDTO.getDataInicio());
+			LocalDate fim = toLocalDate(metaDTO.getDataFinal());
+			
+			Boolean validaData = validacoes.validaData(inicio, fim);
+			if(!validaData) {
+				throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
+			}
 			Meta meta =  metaRepository.findById(metaDTO.getId());
 			if(meta != null) {
 				BeanUtils.copyProperties(metaDTO, meta);
@@ -64,10 +80,10 @@ public class MetaServiceImpl implements MetaService {
 					BeanUtils.copyProperties(metaSave, metaDTO);
 					return metaDTO;
 				}else {
-					throw new ServicoException(MensagemErro.ERRO_AO_INSERIR_META);
+					throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.META));
 				}
 			}else{
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_META);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -87,10 +103,10 @@ public class MetaServiceImpl implements MetaService {
 					BeanUtils.copyProperties(meta, metaDTO);
 					return metaDTO;
 				}else {
-					throw new ServicoException(MensagemErro.ERRO_AO_INATIVAR_META);
+					throw new ServicoException(MensagemErro.ERRO_INATIVAR.concat(MensagemErro.META));
 				}
 			}else {
-				throw new ValidacaoException(MensagemErro.ERRO_PESQUISAR_META);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -127,7 +143,7 @@ public class MetaServiceImpl implements MetaService {
 				BeanUtils.copyProperties(meta, metaDTO);
 				return metaDTO;
 			}else {
-				throw new ServicoException(MensagemErro.ERRO_PESQUISAR_META);
+				throw new ServicoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();

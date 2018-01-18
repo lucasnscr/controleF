@@ -38,7 +38,7 @@ public class TelefoneServiceImpl implements TelefoneService {
 				BeanUtils.copyProperties(telefoneSave, telefoneDTO);
 				return telefoneDTO;
 			}else {
-				throw new ServicoException(MensagemErro.ERRO_TELEFONE_INSERIR);
+				throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.TELEFONE));
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -58,7 +58,7 @@ public class TelefoneServiceImpl implements TelefoneService {
 					BeanUtils.copyProperties(telefoneSave, telefoneDTO);
 					return telefoneDTO;
 				}else {
-					throw new ServicoException(MensagemErro.ERRO_TELEFONE_ATUALIZAR);
+					throw new ServicoException(MensagemErro.ERRO_ATUALIZAR.concat(MensagemErro.TELEFONE));
 				}
 			}
 		} catch (Exception e) {
@@ -79,10 +79,10 @@ public class TelefoneServiceImpl implements TelefoneService {
 					BeanUtils.copyProperties(telefone, telefoneDTO);
 					return telefoneDTO;
 				}else{
-					throw new ServicoException(MensagemErro.ERRO_TELEFONE_ATUALIZAR);
+					throw new ServicoException(MensagemErro.ERRO_ATUALIZAR.concat(MensagemErro.TELEFONE));
 				}
 			}else{
-				throw new ValidacaoException(MensagemErro.BUSCA_TELEFONE_SEM_RESULTADO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -104,7 +104,7 @@ public class TelefoneServiceImpl implements TelefoneService {
 				}
 				return telefonesDTO;
 			}else{
-				throw new ValidacaoException(MensagemErro.BUSCA_TELEFONE_SEM_RESULTADO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -121,7 +121,7 @@ public class TelefoneServiceImpl implements TelefoneService {
 				BeanUtils.copyProperties(telefone, telefoneDTO);
 				return telefoneDTO;
 			}else {
-				throw new ValidacaoException(MensagemErro.BUSCA_TELEFONE_SEM_RESULTADO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();

@@ -48,7 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			Usuario usuCadastrado = usuarioRepository.save(usuario);
 			if (usuCadastrado == null) {
-				throw new ServicoException(MensagemErro.ERRO_INSERIR_USUARIO);
+				throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.USUARIO));
 			} else {
 				BeanUtils.copyProperties(usuCadastrado, cadUsuarioDTO);
 			}
@@ -101,7 +101,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			if (usuAlterado != null) {
 				BeanUtils.copyProperties(usuAlterado, alteraDadosUsuarioDTO);
 			} else {
-				throw new ServicoException(MensagemErro.ERRO_ATUALIZAR_USUARIO);
+				throw new ServicoException(MensagemErro.ERRO_ATUALIZAR.concat(MensagemErro.USUARIO));
 			}
 
 			return alteraDadosUsuarioDTO;
@@ -122,7 +122,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				if (usuarioInativado != null) {
 					BeanUtils.copyProperties(usuarioInativado, gerenciarUsuarioDTO);
 				} else {
-					throw new ServicoException(MensagemErro.ERRO_INATIVAR_USUARIO);
+					throw new ServicoException(MensagemErro.ERRO_INATIVAR.concat(MensagemErro.USUARIO));
 				}
 			}
 		} catch (Exception e) {
@@ -184,7 +184,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 					throw new ValidacaoException(MensagemErro.ALTERACAO_SENHA_INVALIDA);
 				}
 			} else {
-				throw new ValidacaoException(MensagemErro.ERRO_BUSCA_USUARIO);
+				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
 			}
 		} catch (Exception e) {
 			e.getMessage();

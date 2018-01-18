@@ -21,10 +21,10 @@ public class MetaDTO implements Serializable {
 	@Size(min =1, max= 200)
 	private String descricao;
 	
-	@NotNull
+	@NotNull(message="Informe data inicio")
 	private Date dataInicio;
 
-	@NotNull
+	@NotNull(message="Informe data inicio")
 	private Date dataFinal;
 	
 	@NotNull

@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import entity.Investimento;
 
 public interface InvestimentoRepository extends JpaRepository<Investimento, Long> {
-	
-	Investimento findById(Long id);
+
 	Investimento findByIdAndAtivo(Long id, Integer ativo);
-	List<Investimento> findByIdUsuario(Long idUsuario);
+
+	List<Investimento> findByIdUsuarioAndAtivo(Long idUsuario, Integer ativo);
 
 }
