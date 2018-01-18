@@ -67,5 +67,6 @@ public class MensagemErro {
 	public static final String ERRO_DATA_FIM_INVESTIMENTO = "Informe uma data para o resgate do investimento";
 	public static final String INVESTIMENTO = "Investimento";
 	public static final String INVESTIMENTO_MENSAL = "Informe investimento mensal desejado";
+	public static final String SIMULACAO_INVESTIMENTO = "Campos necessários para simular investimento não foi informado";
 
 }

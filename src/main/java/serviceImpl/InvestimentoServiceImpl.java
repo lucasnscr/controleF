@@ -177,7 +177,7 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 		try {
 			
 			String tipoInvestidor = investimentoDTO.getTipoInvestidor();
-			if(!tipoInvestidor.equals(null)) {
+			if(!tipoInvestidor.equals(null) && tipoInvestidor.equals("")) {
 				switch (tipoInvestidor) {
 				case "RendaMensal":
 					Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
@@ -193,6 +193,8 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 				default:
 					break;
 				}
+			}else {
+				throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);
 			}
 		} catch (Exception e) {
 			e.getMessage();
