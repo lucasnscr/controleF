@@ -1,6 +1,11 @@
 package serviceImpl;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,6 +55,7 @@ public class MetaServiceImpl implements MetaService {
 		try {
 			validacoes.validaUsuario(metaDTO.getUsuario().getId());
 			validacoes.validaMeta(metaDTO);
+			validacoes.validaData(metaDTO.getDataInicio()., metaDTO.getDataFinal());
 			Meta meta =  metaRepository.findById(metaDTO.getId());
 			if(meta != null) {
 				BeanUtils.copyProperties(metaDTO, meta);
@@ -127,6 +133,12 @@ public class MetaServiceImpl implements MetaService {
 			e.getMessage();
 		}
 		return null;
+	}
+	
+	private LocalDate toLocalDate(Date d) {
+		Instant instant = Instant.ofEpochMilli(d.getTime());
+		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+		return localDate;
 	}
 
 }
