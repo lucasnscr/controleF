@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import dto.InvestimentoDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import io.swagger.annotations.Api;
 import service.InvestimentoService;
 
+@Api
 @RestController
 @RequestMapping("/investimento")
 public class InvestimentoResource {
