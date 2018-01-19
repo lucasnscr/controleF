@@ -6,8 +6,10 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import MensagensErro.MensagemErro;
+import dto.CentroGastosDTO;
 import dto.EnderecoDTO;
 import dto.InvestimentoDTO;
+import dto.LancamentoDTO;
 import dto.MetaDTO;
 import dto.TelefoneDTO;
 import entity.Endereco;
@@ -26,7 +28,7 @@ public class ValidacoesImpl {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
+	
 	public void validaLogin(String login) throws ValidacaoException {
 		try {
 			if (!"".equals(login)) {
@@ -220,6 +222,10 @@ public class ValidacoesImpl {
 		return dataValida;
     }
 	
+	public void validaCentroGastos(CentroGastosDTO centroGastosDTO) throws ValidacaoException{
+		
+	}
+	
 	public void ValidaInvestimento(InvestimentoDTO investimentoDTO) throws ValidacaoException{
 		
 		if(investimentoDTO.getUsuario().getId() == null) {
@@ -233,6 +239,14 @@ public class ValidacoesImpl {
 		if(investimentoDTO.getFim() == null) {
 			throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
 		}
+	}
+	
+	public void validaLancamento(LancamentoDTO lancamentoDTO) throws ValidacaoException{
+		
+		
+		
+		
+		
 	}
 
 }

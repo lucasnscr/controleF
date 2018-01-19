@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,22 +27,77 @@ public class CentroGastos implements Serializable {
 	private Long id;
 	
 	@Column(name= "id_usuario", nullable = false)
-	private Usuario usuario;
+	private Long idUsurio;
 	
-	@Column(name= "id_fluxo_caixa", nullable = false)
-	private FluxoCaixa fluxoCaixa;
-	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Double recebimento;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Double pagamento;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Double saldo;
 	
 	@Column(nullable = false)
-	private Date periodo;
+	private Date mêsAno;
 	
+	@Column(nullable = true)
+	private List<Lancamento> lancamentos;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getIdUsurio() {
+		return idUsurio;
+	}
+
+	public void setIdUsurio(Long idUsurio) {
+		this.idUsurio = idUsurio;
+	}
+
+	public Double getRecebimento() {
+		return recebimento;
+	}
+
+	public void setRecebimento(Double recebimento) {
+		this.recebimento = recebimento;
+	}
+
+	public Double getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Double pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+	public Date getMêsAno() {
+		return mêsAno;
+	}
+
+	public void setMêsAno(Date mêsAno) {
+		this.mêsAno = mêsAno;
+	}
+
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
+	}
+
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
+	}
 
 }

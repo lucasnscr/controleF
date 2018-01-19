@@ -1,21 +1,32 @@
 package serviceImpl;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
 import MensagensErro.MensagemErro;
 import dto.AlteraDadosUsuarioDTO;
 import dto.CadastroUsuarioDTO;
 import dto.GerenciarUsuarioDTO;
+import entity.CentroGastos;
 import entity.Usuario;
 import enums.FlagAtivo;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import repository.CentroGastosRepository;
 import repository.UsuarioRepository;
 import service.UsuarioService;
 import validacoes.ValidacoesImpl;
+
+/**
+ * 
+ * @author ldnascimento
+ * Incluir usuário e seu centro de gastos
+ */
 
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -25,10 +36,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private ValidacoesImpl validacoes;
 
+	@Autowired
+	private CentroGastosRepository centroGastosRepository;
+	
 	@Override
+	@Rollback(value=true)
 	public CadastroUsuarioDTO incluir(CadastroUsuarioDTO cadUsuarioDTO) throws ServicoException {
 		try {
 			Usuario usuario = new Usuario();
+			CentroGastos gastos =  new CentroGastos();
 
 			validacoes.validaLogin(cadUsuarioDTO.getLogin());
 			validacoes.validaEmail(cadUsuarioDTO.getEmail(), cadUsuarioDTO.getEmailConfirmacao());
@@ -51,6 +67,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 				throw new ServicoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.USUARIO));
 			} else {
 				BeanUtils.copyProperties(usuCadastrado, cadUsuarioDTO);
+				gastos.setIdUsurio(usuCadastrado.getId());
+				gastos.setMêsAno(Date.from(Instant.now()));
+				CentroGastos centroGastos = centroGastosRepository.save(gastos);
+				if(centroGastos == null) {
+					throw new ValidacaoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.CENTRO_GASTOS));
+				}
 			}
 			return cadUsuarioDTO;
 		} catch (Exception e) {

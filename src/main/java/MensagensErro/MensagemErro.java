@@ -68,5 +68,18 @@ public class MensagemErro {
 	public static final String INVESTIMENTO = "Investimento";
 	public static final String INVESTIMENTO_MENSAL = "Informe investimento mensal desejado";
 	public static final String SIMULACAO_INVESTIMENTO = "Campos necessários para simular investimento não foi informado";
+	public static final String OPCAO_INVALIDA = "Opção de simulação inválida";
+	
+	/**
+	 *LANCAMENTO 
+	 */
 
+	public static final String LANCAMENTO = "Lançamento";
+	
+	/**
+	 *CENTRO GASTOS
+	 */
+
+	public static final String CENTRO_GASTOS = "Centro de Gastos";
+	
 }

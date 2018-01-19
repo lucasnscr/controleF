@@ -191,6 +191,7 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 					}else {
 						throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);
 					}
+									
 				case "RendimentoMensalInvestimentoPeriodo":
 					Double valor = investimentoDTO.getValor();
 					Rentabilidade jurosInvestimento = investimentoDTO.getRentabilidade();
@@ -215,7 +216,7 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 						throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);
 					}
 				default:
-					break;
+					throw new ValidacaoException(MensagemErro.OPCAO_INVALIDA);
 				}
 			}else {
 				throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);

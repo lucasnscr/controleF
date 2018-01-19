@@ -23,9 +23,6 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USU_SEQ")
 	private Long id;
 	
-	@Column(name= "id_fluxo_caixa", nullable = false)
-	private FluxoCaixa fluxoCaixa;
-	 
 	@Column(nullable=true)
 	private String nome; 
 	
@@ -83,14 +80,6 @@ public class Usuario implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public FluxoCaixa getFluxoCaixa() {
-		return fluxoCaixa;
-	}
-
-	public void setFluxoCaixa(FluxoCaixa fluxoCaixa) {
-		this.fluxoCaixa = fluxoCaixa;
 	}
 
 	public String getNome() {
@@ -220,5 +209,5 @@ public class Usuario implements Serializable {
 	public void setChave(Long chave) {
 		this.chave = chave;
 	}
-	
+
 }
