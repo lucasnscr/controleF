@@ -2,6 +2,7 @@ package dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -38,6 +39,10 @@ public class InvestimentoDTO implements Serializable {
 	private Rentabilidade rentabilidade;
 	
 	private String tipoInvestidor;
+	
+	private Double saldo;
+	
+	private List<Double> rendimentoMensalPeriodo;
 
 	public Long getId() {
 		return id;
@@ -125,6 +130,22 @@ public class InvestimentoDTO implements Serializable {
 
 	public void setTipoInvestidor(String tipoInvestidor) {
 		this.tipoInvestidor = tipoInvestidor;
+	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+	public List<Double> getRendimentoMensalPeriodo() {
+		return rendimentoMensalPeriodo;
+	}
+
+	public void setRendimentoMensalPeriodo(List<Double> rendimentoMensalPeriodo) {
+		this.rendimentoMensalPeriodo = rendimentoMensalPeriodo;
 	}
 	
 	

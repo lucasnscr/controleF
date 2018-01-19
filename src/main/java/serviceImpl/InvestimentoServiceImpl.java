@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import MensagensErro.MensagemErro;
 import dto.InvestimentoDTO;
 import entity.Investimento;
 import enums.FlagAtivo;
+import enums.Rentabilidade;
 import enums.TipoInvestimento;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
@@ -179,17 +181,39 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 			String tipoInvestidor = investimentoDTO.getTipoInvestidor();
 			if(!tipoInvestidor.equals(null) && tipoInvestidor.equals("")) {
 				switch (tipoInvestidor) {
-				case "RendaMensal":
+				case "RendaMensalDesejada":
 					Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
 					TipoInvestimento tipoInvestimento = investimentoDTO.getTipoInvestimento();
-					if(rendaMensalDesejada != null && tipoInvestimento !=  null) {
+					if(rendaMensalDesejada != null || tipoInvestimento !=  null) {
 						Double valorAcumulado =  (rendaMensalDesejada * 12) / tipoInvestimento.getValor();
 						investimentoDTO.setInvestimentoNecessario(valorAcumulado);
 						return investimentoDTO;
 					}else {
-						throw new ValidacaoException(MensagemErro.INVESTIMENTO_MENSAL);
+						throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);
 					}
-				case "":
+				case "RendimentoMensalInvestimentoPeriodo":
+					Double valor = investimentoDTO.getValor();
+					Rentabilidade jurosInvestimento = investimentoDTO.getRentabilidade();
+					if(valor != null || jurosInvestimento != null) {
+						Double saldo = investimentoDTO.getSaldo();
+						Double total = saldo + valor;
+						if(investimentoDTO.getInicio()!= null && investimentoDTO.getFim() != null){
+							LocalDate inicio = toLocalDate(investimentoDTO.getInicio());
+							LocalDate fim = toLocalDate(investimentoDTO.getFim());
+							if(investimentoDTO.getRentabilidade() != null) {
+								long meses = inicio.until(fim, ChronoUnit.MONTHS);
+								List<Double> rendimentoPeriodo =  new ArrayList<Double>();
+								for (int i = 0; i <= meses; i++) {
+									Double rendimentoMensal = (investimentoDTO.getRentabilidade().getValor() * total)/100;
+									rendimentoPeriodo.add(rendimentoMensal);
+								}
+								investimentoDTO.setRendimentoMensalPeriodo(rendimentoPeriodo);
+								return investimentoDTO;
+							}
+						}
+					}else {
+						throw new ValidacaoException(MensagemErro.SIMULACAO_INVESTIMENTO);
+					}
 				default:
 					break;
 				}
