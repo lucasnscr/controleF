@@ -1,27 +1,57 @@
 package serviceImpl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dto.AnaliseLancamentoDTO;
 import dto.LancamentoDTO;
+import entity.Lancamento;
+import enums.TipoLancamento;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import repository.LancamentoRepository;
 import service.LancamentoService;
 import validacoes.ValidacoesImpl;
 
-public class LancamentoServiceImpl implements LancamentoService{
-	
+public class LancamentoServiceImpl implements LancamentoService {
+
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
-	
+
 	@Autowired
 	private ValidacoesImpl validacao;
-	
+
 	@Override
 	public Long incluir(LancamentoDTO lancamentoDTO) throws ServicoException, ValidacaoException {
-		
-		
+		try {
+			validacao.validaLancamento(lancamentoDTO);
+			Lancamento lancamento = new Lancamento();
+			BeanUtils.copyProperties(lancamentoDTO, lancamento);
+			if (lancamentoDTO.getTipoLancamento().equals(TipoLancamento.CREDITO)) {
+				String valor = lancamentoDTO.getTipoRecebimento().getValor();
+				switch (valor) {
+				case "Salário":
+
+					break;
+
+				case "Investimento":
+
+					break;
+
+				case "Freelancer":
+
+					break;
+					
+				case "Herança":
+
+					break;
+				}
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
 		return null;
 	}
 

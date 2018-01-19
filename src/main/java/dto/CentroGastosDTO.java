@@ -13,8 +13,6 @@ public class CentroGastosDTO implements Serializable {
 	
 	private Usuario usuario;
 	
-	private FluxoCaixaDTO fluxoCaixa;
-	
 	private Double recebimento;
 	
 	private Double pagamento;
@@ -37,14 +35,6 @@ public class CentroGastosDTO implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public FluxoCaixaDTO getFluxoCaixa() {
-		return fluxoCaixa;
-	}
-
-	public void setFluxoCaixa(FluxoCaixaDTO fluxoCaixa) {
-		this.fluxoCaixa = fluxoCaixa;
 	}
 
 	public Double getRecebimento() {

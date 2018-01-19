@@ -34,7 +34,7 @@ public class LancamentoDTO implements Serializable {
 	
 	private Date atualizacao;
 	
-	@Size(min=1, max=100)
+	@Size(max=100, message="Informe uma descricao menor")
 	private String descricao;
 	
 	private FlagAtivo ativo;

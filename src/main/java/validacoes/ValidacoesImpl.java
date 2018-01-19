@@ -6,7 +6,6 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import MensagensErro.MensagemErro;
-import dto.CentroGastosDTO;
 import dto.EnderecoDTO;
 import dto.InvestimentoDTO;
 import dto.LancamentoDTO;
@@ -28,7 +27,7 @@ public class ValidacoesImpl {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	public void validaLogin(String login) throws ValidacaoException {
 		try {
 			if (!"".equals(login)) {
@@ -105,8 +104,12 @@ public class ValidacoesImpl {
 	}
 
 	public void validaTermoServico(Boolean termoServico) throws ValidacaoException {
-		if (!termoServico) {
-			throw new ValidacaoException(MensagemErro.TERMO_SERVICO_NAO_ASSINADO);
+		try {
+			if (!termoServico) {
+				throw new ValidacaoException(MensagemErro.TERMO_SERVICO_NAO_ASSINADO);
+			}
+		} catch (Exception e) {
+			e.getMessage();
 		}
 	}
 
@@ -211,8 +214,8 @@ public class ValidacoesImpl {
 			e.getMessage();
 		}
 	}
-	
-	public Boolean validaData(LocalDate inicio, LocalDate fim)throws ValidacaoException{
+
+	public Boolean validaData(LocalDate inicio, LocalDate fim) throws ValidacaoException {
 		Boolean dataValida = null;
 		if (fim.isAfter(inicio)) {
 			dataValida = true;
@@ -220,33 +223,42 @@ public class ValidacoesImpl {
 			dataValida = false;
 		}
 		return dataValida;
-    }
-	
-	public void validaCentroGastos(CentroGastosDTO centroGastosDTO) throws ValidacaoException{
-		
 	}
-	
-	public void ValidaInvestimento(InvestimentoDTO investimentoDTO) throws ValidacaoException{
-		
-		if(investimentoDTO.getUsuario().getId() == null) {
-			throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INVESTIMENTO);
+
+	public void ValidaInvestimento(InvestimentoDTO investimentoDTO) throws ValidacaoException {
+		try {
+			if (investimentoDTO.getUsuario().getId() == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INVESTIMENTO);
+			}
+			
+			if (investimentoDTO.getValor() == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_VALOR_INVESTIMENTO);
+			}
+			
+			if (investimentoDTO.getFim() == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
+			}
+		} catch (Exception e) {
+			e.getMessage();
 		}
-		
-		if(investimentoDTO.getValor() ==  null) {
-			throw new ValidacaoException(MensagemErro.ERRO_VALOR_INVESTIMENTO);
-		}
-		
-		if(investimentoDTO.getFim() == null) {
-			throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
-		}
+
 	}
-	
-	public void validaLancamento(LancamentoDTO lancamentoDTO) throws ValidacaoException{
+
+	public void validaLancamento(LancamentoDTO lancamentoDTO) throws ValidacaoException {
+		try {
+			if(lancamentoDTO.getTipoLancamento() == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_INFORME_TIPO_LANCAMENTO);
+			}
+			if(lancamentoDTO.getValor() == null) {
+				throw new ValidacaoException(MensagemErro.ERRO_INFORME_TIPO_LANCAMENTO);
+			}
+			
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		
 		
-		
-		
-		
+
 	}
 
 }
