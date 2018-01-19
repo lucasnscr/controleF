@@ -23,7 +23,7 @@ public class Lancamento implements Serializable {
 	private Long id;
 	
 	@Column(name="id_centro_gastos", nullable=false)
-	private CentroGastos centroGastos;
+	private Long idCentroGastos;
 	
 	@Column(name="tipo_lancamento", nullable=false)
 	private String tipoLancamento;
@@ -59,12 +59,12 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 
-	public CentroGastos getCentroGastos() {
-		return centroGastos;
+	public Long getIdCentroGastos() {
+		return idCentroGastos;
 	}
 
-	public void setCentroGastos(CentroGastos centroGastos) {
-		this.centroGastos = centroGastos;
+	public void setIdCentroGastos(Long idCentroGastos) {
+		this.idCentroGastos = idCentroGastos;
 	}
 
 	public String getTipoLancamento() {
@@ -130,5 +130,4 @@ public class Lancamento implements Serializable {
 	public void setAtivo(Integer ativo) {
 		this.ativo = ativo;
 	}
-	
 }

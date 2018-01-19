@@ -2,8 +2,7 @@ package enums;
 
 public enum TipoGastos {
 	
-	APLICACAO("Aplicação"),
-	MORADIA("Moraria"),
+	MORADIA("Moradia"),
 	BARES_RESTAURANTES("Bares e Restaurantes"),
 	MERCADO("Mercado"),
 	LAZER("Lazer"),
