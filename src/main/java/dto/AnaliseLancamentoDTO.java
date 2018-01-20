@@ -12,8 +12,6 @@ public class AnaliseLancamentoDTO  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
-	
 	private Double valorInicial;
 	
 	private Double valorFinal;
@@ -33,14 +31,6 @@ public class AnaliseLancamentoDTO  implements Serializable{
 	private Double valoresGastos;
 	
 	private Double valoresRecebidos;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Double getValorInicial() {
 		return valorInicial;

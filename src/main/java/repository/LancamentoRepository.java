@@ -9,8 +9,9 @@ import entity.Lancamento;
 import enums.TipoGastos;
 import enums.TipoLancamento;
 import enums.TipoRecebimento;
+import repositoryCustom.AnaliseLancamentoRepositoryCustom;
 
-public interface LancamentoRepository  extends JpaRepository<Lancamento, Long>{
+public interface LancamentoRepository  extends JpaRepository<Lancamento, Long>, AnaliseLancamentoRepositoryCustom{
 	
 	Lancamento findByIdAndAtivo(Long id, Integer ativo);
 	

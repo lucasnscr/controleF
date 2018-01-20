@@ -2,7 +2,9 @@ package serviceImpl;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -167,20 +169,60 @@ public class LancamentoServiceImpl implements LancamentoService {
 
 	@Override
 	public LancamentoDTO inativar(Long id) throws ServicoException, ValidacaoException {
-		// TODO Auto-generated method stub
+		try {
+			Lancamento lancamento = lancamentoRepository.findByIdAndAtivo(id, FlagAtivo.ATIVO.getValor());
+			if (lancamento != null) {
+				lancamento.setAtivo(FlagAtivo.ATIVO.getValor());
+				Lancamento lancamentoSave = lancamentoRepository.save(lancamento);
+				if(lancamentoSave != null){
+					LancamentoDTO lancamentoDTO =  null;
+					BeanUtils.copyProperties(lancamentoSave, lancamentoDTO);
+					return lancamentoDTO;
+				}else {
+					throw new ServicoException(MensagemErro.ERRO_INATIVAR.concat(MensagemErro.LANCAMENTO));
+				}
+			}else {
+				throw new ServicoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO.concat(MensagemErro.LANCAMENTO));
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		return null;
 	}
 
 	@Override
 	public LancamentoDTO detalharLancamento(Long id) throws ServicoException, ValidacaoException {
-		// TODO Auto-generated method stub
+		try {
+			Lancamento lancamento = lancamentoRepository.findByIdAndAtivo(id, FlagAtivo.ATIVO.getValor());
+			if(lancamento !=  null) {
+				LancamentoDTO lancamentoDTO = null;
+				BeanUtils.copyProperties(lancamento, lancamentoDTO);
+				return lancamentoDTO;
+			}else {
+				throw new ServicoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO.concat(MensagemErro.LANCAMENTO));
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		return null;
 	}
 
 	@Override
 	public AnaliseLancamentoDTO analiseLancamento(AnaliseLancamentoDTO analiseLancamentoDTO)
 			throws ServicoException, ValidacaoException {
-		// TODO Auto-generated method stub
+		try {
+			List<Lancamento> analisarLancamentosList = lancamentoRepository.analisarLancamentosFiltro(analiseLancamentoDTO);
+			if (CollectionUtils.isNotEmpty(analisarLancamentosList)) {
+				for (Lancamento lancamento : analisarLancamentosList) {
+					
+				}
+			}
+			
+		}catch (Exception e) {
+			e.getMessage();
+		}
+		
+		
 		return null;
 	}
 
