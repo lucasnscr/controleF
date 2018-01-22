@@ -79,6 +79,12 @@ public class MensagemErro {
 	public static final String ERRO_INFORME_VALOR_LANCAMENTO = "Informe um valor para lançamento";
 	
 	/**
+	 * ANALISE LANCAMENTO
+	 */
+	
+	public static final String ANALISE_LANCAMENTO_DATA_FIM = "Informe uma data fim para a análise de lançamentos";
+	
+	/**
 	 *CENTRO GASTOS
 	 */
 

@@ -1,6 +1,7 @@
 package validacoes;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -256,9 +257,16 @@ public class ValidacoesImpl {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		
-		
-
+	}
+	
+	public void validaDataAnaliseLancamento(Date inicio, Date fim) throws ValidacaoException{
+		try {
+			if(inicio != null && fim == null) {
+				throw new ValidacaoException(MensagemErro.ANALISE_LANCAMENTO_DATA_FIM);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 
 }

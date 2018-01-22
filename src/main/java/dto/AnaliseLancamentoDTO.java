@@ -12,6 +12,10 @@ public class AnaliseLancamentoDTO  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * PESQUISA
+	 */
+
 	private Double valorInicial;
 	
 	private Double valorFinal;
@@ -28,9 +32,33 @@ public class AnaliseLancamentoDTO  implements Serializable{
 	
 	private TipoRecebimento tipoRecebimento;
 	
+	/**
+	 * RESULTADO
+	 */
+	
 	private Double valoresGastos;
 	
+	private Double valoresGastoMoradia;
+	
+	private Double valoresGastoBarRestaurante;
+	
+	private Double valoresGastoMercado;
+	
+	private Double valoresGastoLazer;
+	
+	private Double valoresGastoOutros;
+	
+	private Double valoresGastoCompras;
+	
 	private Double valoresRecebidos;
+
+	private Double valoresRecebidosSalario;
+	
+	private Double valoresRecebidosInvestimento;
+	
+	private Double valoresRecebidosHeranca;
+	
+	private Double valoresRecebidosFreelancer;
 
 	public Double getValorInicial() {
 		return valorInicial;
@@ -104,12 +132,92 @@ public class AnaliseLancamentoDTO  implements Serializable{
 		this.valoresGastos = valoresGastos;
 	}
 
+	public Double getValoresGastoMoradia() {
+		return valoresGastoMoradia;
+	}
+
+	public void setValoresGastoMoradia(Double valoresGastoMoradia) {
+		this.valoresGastoMoradia = valoresGastoMoradia;
+	}
+
+	public Double getValoresGastoBarRestaurante() {
+		return valoresGastoBarRestaurante;
+	}
+
+	public void setValoresGastoBarRestaurante(Double valoresGastoBarRestaurante) {
+		this.valoresGastoBarRestaurante = valoresGastoBarRestaurante;
+	}
+
+	public Double getValoresGastoMercado() {
+		return valoresGastoMercado;
+	}
+
+	public void setValoresGastoMercado(Double valoresGastoMercado) {
+		this.valoresGastoMercado = valoresGastoMercado;
+	}
+
+	public Double getValoresGastoLazer() {
+		return valoresGastoLazer;
+	}
+
+	public void setValoresGastoLazer(Double valoresGastoLazer) {
+		this.valoresGastoLazer = valoresGastoLazer;
+	}
+
+	public Double getValoresGastoOutros() {
+		return valoresGastoOutros;
+	}
+
+	public void setValoresGastoOutros(Double valoresGastoOutros) {
+		this.valoresGastoOutros = valoresGastoOutros;
+	}
+
+	public Double getValoresGastoCompras() {
+		return valoresGastoCompras;
+	}
+
+	public void setValoresGastoCompras(Double valoresGastoCompras) {
+		this.valoresGastoCompras = valoresGastoCompras;
+	}
+
 	public Double getValoresRecebidos() {
 		return valoresRecebidos;
 	}
 
 	public void setValoresRecebidos(Double valoresRecebidos) {
 		this.valoresRecebidos = valoresRecebidos;
+	}
+
+	public Double getValoresRecebidosSalario() {
+		return valoresRecebidosSalario;
+	}
+
+	public void setValoresRecebidosSalario(Double valoresRecebidosSalario) {
+		this.valoresRecebidosSalario = valoresRecebidosSalario;
+	}
+
+	public Double getValoresRecebidosInvestimento() {
+		return valoresRecebidosInvestimento;
+	}
+
+	public void setValoresRecebidosInvestimento(Double valoresRecebidosInvestimento) {
+		this.valoresRecebidosInvestimento = valoresRecebidosInvestimento;
+	}
+
+	public Double getValoresRecebidosHeranca() {
+		return valoresRecebidosHeranca;
+	}
+
+	public void setValoresRecebidosHeranca(Double valoresRecebidosHeranca) {
+		this.valoresRecebidosHeranca = valoresRecebidosHeranca;
+	}
+
+	public Double getValoresRecebidosFreelancer() {
+		return valoresRecebidosFreelancer;
+	}
+
+	public void setValoresRecebidosFreelancer(Double valoresRecebidosFreelancer) {
+		this.valoresRecebidosFreelancer = valoresRecebidosFreelancer;
 	}
 	
 }

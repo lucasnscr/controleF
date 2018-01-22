@@ -213,16 +213,70 @@ public class LancamentoServiceImpl implements LancamentoService {
 		try {
 			List<Lancamento> analisarLancamentosList = lancamentoRepository.analisarLancamentosFiltro(analiseLancamentoDTO);
 			if (CollectionUtils.isNotEmpty(analisarLancamentosList)) {
+				AnaliseLancamentoDTO analise =  new AnaliseLancamentoDTO();
 				for (Lancamento lancamento : analisarLancamentosList) {
-					
+					if (lancamento.getTipoLancamento().equals(TipoLancamento.CREDITO.getValor())) {
+						String valor = lancamento.getTipoRecebimento();
+						switch (valor) {
+						case "Salário":
+							Double recebidoSalario =+ lancamento.getValor();
+							analise.setValoresRecebidosSalario(recebidoSalario);
+							break;
+						case "Investimento":
+							Double recebidoInvestimento =+ lancamento.getValor();
+							analise.setValoresRecebidosInvestimento(recebidoInvestimento);
+							break;
+						case "Freelancer":
+							Double recebidoFreela =+ lancamento.getValor();
+							analise.setValoresRecebidosFreelancer(recebidoFreela);
+							break;
+						case "Herança":
+							Double recebidoHeranca =+ lancamento.getValor();
+							analise.setValoresRecebidosHeranca(recebidoHeranca);
+							break;
+						}
+						
+						Double valorRecebido =+ lancamento.getValor();
+						analise.setValoresRecebidos(valorRecebido);
+						
+					}else{
+						String valor = lancamento.getTipoGasto();
+						switch (valor) {
+						case "Moradia":
+							Double gastoMoradia =+  lancamento.getValor();
+							analise.setValoresGastoMoradia(gastoMoradia);
+							break;
+						case "Bares e Restaurantes":
+							Double gastoBaresRestaurante =+  lancamento.getValor();							
+							analise.setValoresGastoBarRestaurante(gastoBaresRestaurante);
+							break;
+						case "Mercado":
+							Double gastoMercado =+  lancamento.getValor();
+							analise.setValoresGastoBarRestaurante(gastoMercado);
+							break;
+						case "Lazer":
+							Double gastoLazer =+  lancamento.getValor();
+							analise.setValoresGastoBarRestaurante(gastoLazer);
+							break;
+						case "Compras":
+							Double gastoCompras =+  lancamento.getValor();
+							analise.setValoresGastoBarRestaurante(gastoCompras);
+							break;
+						case "Outros":
+							Double gastoOutros =+  lancamento.getValor();
+							analise.setValoresGastoBarRestaurante(gastoOutros);
+							break;
+						}
+						Double valorGasto =+ lancamento.getValor();
+						analise.setValoresGastos(valorGasto);
+					}
 				}
+				return analise;
 			}
 			
 		}catch (Exception e) {
 			e.getMessage();
 		}
-		
-		
 		return null;
 	}
 
