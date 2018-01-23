@@ -7,7 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import MensagensErro.MensagemErro;
+import Constantes.MensagemErro;
 import dto.EnderecoDTO;
 import entity.Endereco;
 import enums.FlagAtivo;

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import MensagensErro.MensagemErro;
+import Constantes.MensagemErro;
 import dto.EnderecoDTO;
 import dto.InvestimentoDTO;
 import dto.LancamentoDTO;

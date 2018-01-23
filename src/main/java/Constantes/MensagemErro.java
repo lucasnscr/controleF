@@ -1,4 +1,4 @@
-package MensagensErro;
+package Constantes;
 
 public class MensagemErro {
 	

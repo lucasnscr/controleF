@@ -24,5 +24,5 @@ public interface LancamentoRepository  extends JpaRepository<Lancamento, Long>, 
 	List<Lancamento> findByTipoGastos(TipoGastos gastos);
 	
 	List<Lancamento> findByTipoLancamento(TipoLancamento tipoLancamento);
-
+	
 }

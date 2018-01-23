@@ -20,6 +20,9 @@ public class LancamentoDTO implements Serializable {
 	@NotNull(message="Lançamento está vinculado a um centro de gasto")
 	private CentroGastosDTO centroGastosDTO;
 	
+	@NotNull(message="Informe o id do usuário")
+	private Long idUsuario;
+	
 	@NotNull(message="Informe um tipo de lançamento")
 	private TipoLancamento TipoLancamento;
 	
@@ -53,6 +56,14 @@ public class LancamentoDTO implements Serializable {
 
 	public void setCentroGastosDTO(CentroGastosDTO centroGastosDTO) {
 		this.centroGastosDTO = centroGastosDTO;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public TipoLancamento getTipoLancamento() {
@@ -118,4 +129,5 @@ public class LancamentoDTO implements Serializable {
 	public void setAtivo(FlagAtivo ativo) {
 		this.ativo = ativo;
 	}
+	
 }

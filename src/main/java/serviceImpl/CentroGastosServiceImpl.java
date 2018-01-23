@@ -8,6 +8,7 @@ import entity.CentroGastos;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import repository.CentroGastosRepository;
+import repository.LancamentoRepository;
 import service.CentroGastosService;
 import validacoes.ValidacoesImpl;
 
@@ -15,6 +16,9 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 
 	@Autowired
 	private CentroGastosRepository centroGastosRepository;
+	
+	@Autowired
+	private LancamentoRepository lancamentoRepository;
 	
 	@Autowired
 	private ValidacoesImpl validacao;

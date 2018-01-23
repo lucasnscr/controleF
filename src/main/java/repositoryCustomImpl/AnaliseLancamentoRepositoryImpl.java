@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import MensagensErro.MensagemErro;
+import Constantes.MensagemErro;
 import dto.AnaliseLancamentoDTO;
 import entity.Lancamento;
 import exceptions.ServicoException;
@@ -106,10 +106,18 @@ public class AnaliseLancamentoRepositoryImpl  implements AnaliseLancamentoReposi
 		
 	}
 	
+	@Override
+	public List<Lancamento> pesquisaMensal(LocalDate inicio, LocalDate fim)
+			throws ServicoException, ValidacaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private LocalDate toLocalDate(Date d) {
 		Instant instant = Instant.ofEpochMilli(d.getTime());
 		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
 		return localDate;
 	}
+
 
 }

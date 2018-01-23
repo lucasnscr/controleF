@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import MensagensErro.MensagemErro;
+import Constantes.MensagemErro;
 import dto.AlteraDadosUsuarioDTO;
 import dto.CadastroUsuarioDTO;
 import dto.GerenciarUsuarioDTO;

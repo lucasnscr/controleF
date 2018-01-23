@@ -8,7 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import MensagensErro.MensagemErro;
+import Constantes.MensagemErro;
 import dto.AnaliseLancamentoDTO;
 import dto.LancamentoDTO;
 import entity.CentroGastos;
@@ -41,7 +41,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 			validacao.validaLancamento(lancamentoDTO);
 			Lancamento lancamento = new Lancamento();
 			BeanUtils.copyProperties(lancamentoDTO, lancamento);
-			CentroGastos centroGastos = centroGastosRepository.findById(lancamentoDTO.getCentroGastosDTO().getId());
+			CentroGastos centroGastos = centroGastosRepository.findByIdUsuario(lancamentoDTO.getIdUsuario());
 			if(centroGastos != null) {
 				lancamento.setIdCentroGastos(centroGastos.getId());
 			}else {
