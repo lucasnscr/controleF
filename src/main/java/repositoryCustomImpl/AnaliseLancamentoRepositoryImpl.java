@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import Constantes.MensagemErro;
 import dto.AnaliseLancamentoDTO;
 import entity.Lancamento;
+import enums.FlagAtivo;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import repositoryCustom.AnaliseLancamentoRepositoryCustom;
@@ -106,11 +107,25 @@ public class AnaliseLancamentoRepositoryImpl  implements AnaliseLancamentoReposi
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Lancamento> pesquisaMensal(LocalDate inicio, LocalDate fim)
 			throws ServicoException, ValidacaoException {
-		// TODO Auto-generated method stub
-		return null;
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" SELECT lancamento FROM Lancamento ")
+			.append(" WHERE ")
+			.append(" cadastro BETWEEN :inicio and :fim")
+			.append(" AND ")
+			.append(" ativo = :ativo");
+
+		Query  query =  entityManager.createQuery(sql.toString());
+		query.setParameter("inicio", inicio);
+		query.setParameter("fim", fim);
+		query.setParameter("ativo", FlagAtivo.ATIVO.getValor());
+		List<Lancamento> lancamentoList = query.getResultList();
+		return lancamentoList;
 	}
 	
 	private LocalDate toLocalDate(Date d) {

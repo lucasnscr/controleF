@@ -1,7 +1,7 @@
 package dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.Usuario;
@@ -20,9 +20,7 @@ public class CentroGastosDTO implements Serializable {
 	
 	private Double saldo;
 	
-	private Date mesAno;
-	
-	private List<List<LancamentoDTO>> lancamentoList;
+	private ArrayList<List<LancamentoDTO>> lancamentoList;
 
 	public Long getId() {
 		return id;
@@ -64,20 +62,12 @@ public class CentroGastosDTO implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public Date getMesAno() {
-		return mesAno;
-	}
-
-	public void setMesAno(Date mesAno) {
-		this.mesAno = mesAno;
-	}
-
-	public List<List<LancamentoDTO>> getLancamentoList() {
+	public ArrayList<List<LancamentoDTO>> getLancamentoList() {
 		return lancamentoList;
 	}
 
-	public void setLancamentoList(List<List<LancamentoDTO>> lancamentoList) {
+	public void setLancamentoList(ArrayList<List<LancamentoDTO>> lancamentoList) {
 		this.lancamentoList = lancamentoList;
 	}
-	
+
 }

@@ -120,15 +120,17 @@ public class ValidacoesImpl {
 		return nextLong;
 	}
 
-	public void validaUsuario(Long id) throws ValidacaoException {
+	public Usuario validaUsuario(Long id) throws ValidacaoException {
 		try {
 			Usuario usuario = usuarioRepository.findById(id);
 			if (usuario == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INEXISTENTE);
 			}
+			return usuario;
 		} catch (Exception e) {
 			e.getMessage();
 		}
+		return null;
 	}
 
 	public void validaEscolaridade(Escolaridade escolaridade) throws ValidacaoException {
