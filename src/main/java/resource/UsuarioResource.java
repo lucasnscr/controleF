@@ -13,8 +13,10 @@ import dto.CadastroUsuarioDTO;
 import dto.GerenciarUsuarioDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import io.swagger.annotations.Api;
 import service.UsuarioService;
 
+@Api
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioResource {

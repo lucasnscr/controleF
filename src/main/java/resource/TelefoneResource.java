@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import dto.TelefoneDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import io.swagger.annotations.Api;
 import service.TelefoneService;
 
+@Api
 @RestController
 @RequestMapping("/telefone")
 public class TelefoneResource {

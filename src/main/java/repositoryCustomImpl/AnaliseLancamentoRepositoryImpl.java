@@ -133,6 +133,4 @@ public class AnaliseLancamentoRepositoryImpl  implements AnaliseLancamentoReposi
 		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
 		return localDate;
 	}
-
-
 }

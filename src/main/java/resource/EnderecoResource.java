@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import dto.EnderecoDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import io.swagger.annotations.Api;
 import service.EnderecoService;
 
+@Api
 @RestController
 @RequestMapping("/endereco")
 public class EnderecoResource {
@@ -51,7 +53,4 @@ public class EnderecoResource {
     	EnderecoDTO endDTO = enderecoService.detalharEndereco(id);
     	return endDTO;
     }
-	
-	
-
 }

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import dto.MetaDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import io.swagger.annotations.Api;
 import service.MetaService;
 
+@Api
 @RestController
 @RequestMapping("/meta")
 public class MetaResource {
