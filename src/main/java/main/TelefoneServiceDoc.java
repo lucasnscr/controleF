@@ -24,16 +24,16 @@ public class TelefoneServiceDoc extends Application {
 		conf.setResourcePackage("src/main/java/resource");
 		conf.setScan(true);
 	}
-	
+
 	@Override
-	  public java.util.Set<Class<?>> getClasses() {
+	public java.util.Set<Class<?>> getClasses() {
 		java.util.Set<Class<?>> resources = new HashSet<>();
-	      resources.add(JacksonJavaTimeConfiguration.class);
-	      resources.add(TelefoneResource.class);
-	       
-	      resources.add(ApiListingResource.class);
-	      resources.add(SwaggerSerializers.class);
-	      return resources;
-	   }
-	
+		resources.add(JacksonJavaTimeConfiguration.class);
+		resources.add(TelefoneResource.class);
+
+		resources.add(ApiListingResource.class);
+		resources.add(SwaggerSerializers.class);
+		return resources;
+	}
+
 }

@@ -179,7 +179,7 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 		try {
 			
 			String tipoInvestidor = investimentoDTO.getTipoInvestidor();
-			if(!tipoInvestidor.equals(null) && tipoInvestidor.equals("")) {
+			if(!tipoInvestidor.equals(null) && !tipoInvestidor.equals("")) {
 				switch (tipoInvestidor) {
 				case "RendaMensalDesejada":
 					Double rendaMensalDesejada = investimentoDTO.getRendaMensal();
