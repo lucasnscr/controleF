@@ -218,6 +218,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 					if (lancamento.getTipoLancamento().equals(TipoLancamento.CREDITO.getValor())) {
 						String valor = lancamento.getTipoRecebimento();
 						switch (valor) {
+						
 						case "Salário":
 							Double recebidoSalario =+ lancamento.getValor();
 							analise.setValoresRecebidosSalario(recebidoSalario);
@@ -235,10 +236,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 							analise.setValoresRecebidosHeranca(recebidoHeranca);
 							break;
 						}
-						
 						Double valorRecebido =+ lancamento.getValor();
 						analise.setValoresRecebidos(valorRecebido);
-						
 					}else{
 						String valor = lancamento.getTipoGasto();
 						switch (valor) {
@@ -279,5 +278,4 @@ public class LancamentoServiceImpl implements LancamentoService {
 		}
 		return null;
 	}
-
 }

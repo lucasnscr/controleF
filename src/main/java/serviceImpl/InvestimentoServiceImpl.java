@@ -193,11 +193,11 @@ public class InvestimentoServiceImpl implements InvestimentoService {
 					}
 									
 				case "RendimentoMensalInvestimentoPeriodo":
-					Double valor = investimentoDTO.getValor();
+					Double valorInvestimento = investimentoDTO.getValor();
 					Rentabilidade jurosInvestimento = investimentoDTO.getRentabilidade();
-					if(valor != null || jurosInvestimento != null) {
+					if(valorInvestimento != null || jurosInvestimento != null) {
 						Double saldo = investimentoDTO.getSaldo();
-						Double total = saldo + valor;
+						Double total = saldo + valorInvestimento;
 						if(investimentoDTO.getInicio()!= null && investimentoDTO.getFim() != null){
 							LocalDate inicio = toLocalDate(investimentoDTO.getInicio());
 							LocalDate fim = toLocalDate(investimentoDTO.getFim());

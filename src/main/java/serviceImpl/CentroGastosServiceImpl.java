@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import Constantes.MensagemErro;
 import dto.CentroGastosDTO;
 import dto.LancamentoDTO;
 import entity.CentroGastos;
@@ -62,10 +63,10 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 					int ultimoDiaMes = cal.getActualMaximum(i);
 					int ano = cal.get(Calendar.YEAR);
 
-					String teste = primeiroDiaMes + "/" + i + "/" + ano;
-					String teste2 = ultimoDiaMes + "/" + i + "/" + ano;
-					Date inicioDate = sdf.parse(teste);
-					Date fimDate = sdf.parse(teste2);
+					String dataParserInicio = primeiroDiaMes + "/" + i + "/" + ano;
+					String dataParserFim = ultimoDiaMes + "/" + i + "/" + ano;
+					Date inicioDate = sdf.parse(dataParserInicio);
+					Date fimDate = sdf.parse(dataParserFim);
 					LocalDate inicio = toLocalDate(inicioDate);
 					LocalDate fim = toLocalDate(fimDate);
 
@@ -144,6 +145,8 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 				centroGastosDTO.setLancamentoList(lancamentoDTOArrayList);
 
 				return centroGastosDTO;
+			}else {
+				throw new ValidacaoException(MensagemErro.USUARIO_CENTRO_GASTOS);
 			}
 		} catch (Exception e) {
 			e.getMessage();

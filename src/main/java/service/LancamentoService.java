@@ -15,6 +15,6 @@ public interface LancamentoService {
 
 	LancamentoDTO detalharLancamento(Long id) throws ServicoException, ValidacaoException;
 
-	AnaliseLancamentoDTO analiseLancamento(AnaliseLancamentoDTO analiseLancamentoDTO) throws ServicoException, ValidacaoException;;
-
+	AnaliseLancamentoDTO analiseLancamento(AnaliseLancamentoDTO analiseLancamentoDTO) throws ServicoException, ValidacaoException;
+	
 }

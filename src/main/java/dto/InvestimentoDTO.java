@@ -147,6 +147,4 @@ public class InvestimentoDTO implements Serializable {
 	public void setRendimentoMensalPeriodo(List<Double> rendimentoMensalPeriodo) {
 		this.rendimentoMensalPeriodo = rendimentoMensalPeriodo;
 	}
-	
-	
 }

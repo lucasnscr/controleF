@@ -2,6 +2,7 @@ package dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import enums.FlagAtivo;
 import enums.TipoGastos;
@@ -11,6 +12,13 @@ import enums.TipoRecebimento;
 public class AnaliseLancamentoDTO  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Analise Gastos
+	 */
+	
+	private List<TipoGastos> tiposGastosList;
+	private List<TipoRecebimento> tipoRecebimentoList;
 	
 	/**
 	 * PESQUISA
@@ -39,11 +47,11 @@ public class AnaliseLancamentoDTO  implements Serializable{
 	private Double valoresGastos;
 	
 	private Double valoresGastoMoradia;
-	
+
 	private Double valoresGastoBarRestaurante;
 	
 	private Double valoresGastoMercado;
-	
+
 	private Double valoresGastoLazer;
 	
 	private Double valoresGastoOutros;
@@ -219,5 +227,21 @@ public class AnaliseLancamentoDTO  implements Serializable{
 	public void setValoresRecebidosFreelancer(Double valoresRecebidosFreelancer) {
 		this.valoresRecebidosFreelancer = valoresRecebidosFreelancer;
 	}
-	
+
+	public List<TipoGastos> getTiposGastosList() {
+		return tiposGastosList;
+	}
+
+	public void setTiposGastosList(List<TipoGastos> tiposGastosList) {
+		this.tiposGastosList = tiposGastosList;
+	}
+
+	public List<TipoRecebimento> getTipoRecebimentoList() {
+		return tipoRecebimentoList;
+	}
+
+	public void setTipoRecebimentoList(List<TipoRecebimento> tipoRecebimentoList) {
+		this.tipoRecebimentoList = tipoRecebimentoList;
+	}
+
 }
