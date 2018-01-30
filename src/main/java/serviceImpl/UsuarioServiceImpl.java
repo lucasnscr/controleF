@@ -6,7 +6,6 @@ import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
 import Constantes.MensagemErro;
 import dto.AlteraDadosUsuarioDTO;
@@ -17,6 +16,7 @@ import entity.Usuario;
 import enums.FlagAtivo;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
+import org.springframework.test.annotation.Rollback;
 import repository.CentroGastosRepository;
 import repository.UsuarioRepository;
 import service.UsuarioService;

@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import Constantes.MensagemErro;
@@ -70,7 +70,7 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 					LocalDate inicio = toLocalDate(inicioDate);
 					LocalDate fim = toLocalDate(fimDate);
 
-					List<LancamentoDTO> lancamentosDTOList = new ArrayList<LancamentoDTO>();
+					List<LancamentoDTO> lancamentosDTOList = new ArrayList<>();
 					List<Lancamento> listaMensal = lancamentoRepository.pesquisaMensal(inicio, fim);
 
 					if (CollectionUtils.isNotEmpty(listaMensal)) {
@@ -156,7 +156,6 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 
 	private LocalDate toLocalDate(Date d) {
 		Instant instant = Instant.ofEpochMilli(d.getTime());
-		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-		return localDate;
+		return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
 	}
 }
