@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import Constantes.MensagemErro;
 import dto.MetaDTO;
@@ -22,6 +23,7 @@ import repository.MetaRepository;
 import service.MetaService;
 import validacoes.ValidacoesImpl;
 
+@Service
 public class MetaServiceImpl implements MetaService {
 
 	@Autowired

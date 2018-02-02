@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import Constantes.MensagemErro;
 import dto.AlteraDadosUsuarioDTO;
@@ -28,6 +29,7 @@ import validacoes.ValidacoesImpl;
  * Incluir usuário e seu centro de gastos
  */
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired

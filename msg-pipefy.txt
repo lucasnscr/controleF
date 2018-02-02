@@ -1,0 +1,19 @@
+Estimulo cadastrado por pip
+
+Vincular campos variáveis 
+
+Msg cria chave 
+
+Falar com Fred sobre arquitetura do MSG e abrir uma exceção para o template dinâmico do email do Pipefy
+
+Chave do MSG e chave do Hub
+
+Origem, destinatário, Título, corpo do email, Header, Cópia Oculta
+
+verificar volumetria, e trigger de email
+
+984317663 Telefone pmo msg
+
+Segundo HUB precisa de token além do app key
+
+Autenticação de sistema Pipefy Batch/Pipefy Online

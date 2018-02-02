@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import Constantes.MensagemErro;
 import dto.InvestimentoDTO;
@@ -32,6 +33,7 @@ import validacoes.ValidacoesImpl;
  *
  */
 
+@Service
 public class InvestimentoServiceImpl implements InvestimentoService {
 
 	@Autowired
