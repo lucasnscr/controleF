@@ -26,7 +26,7 @@ import validacoes.ValidacoesImpl;
 /**
  * 
  * @author ldnascimento
- * Incluir usuário e seu centro de gastos
+ * Incluir usuário e seu centro de gastos 
  */
 
 @Service
