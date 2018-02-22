@@ -21,6 +21,10 @@ import exceptions.ValidacaoException;
 import repository.EnderecoRepository;
 import repository.UsuarioRepository;
 
+
+
+
+
 public class ValidacoesImpl {
 
 	@Autowired

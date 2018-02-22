@@ -8,6 +8,8 @@ public class MensagemErro {
 	public static final String ERRO_INSERIR = "Erro ao inserir ";
 	public static final String ERRO_ATUALIZAR = "Erro ao atualizar ";
 	public static final String ERRO_INATIVAR = "Erro ao inativar ";
+	public static final String ERRO_TESTE = "Erro no teste unitário do ";
+	
 	
 	/**
 	 * ENDERECO
