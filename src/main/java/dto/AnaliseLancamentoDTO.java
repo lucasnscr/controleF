@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -67,9 +68,29 @@ public class AnaliseLancamentoDTO  implements Serializable{
 	private Double valoresRecebidosHeranca;
 	
 	private Double valoresRecebidosFreelancer;
+	
+	private LocalTime horasEstudoInicio;
+	
+	private LocalTime horasEstudoFim;
 
 	public Double getValorInicial() {
 		return valorInicial;
+	}
+
+	public LocalTime getHorasEstudoInicio() {
+		return horasEstudoInicio;
+	}
+
+	public void setHorasEstudoInicio(LocalTime horasEstudoInicio) {
+		this.horasEstudoInicio = horasEstudoInicio;
+	}
+
+	public LocalTime getHorasEstudoFim() {
+		return horasEstudoFim;
+	}
+
+	public void setHorasEstudoFim(LocalTime horasEstudoFim) {
+		this.horasEstudoFim = horasEstudoFim;
 	}
 
 	public void setValorInicial(Double valorInicial) {

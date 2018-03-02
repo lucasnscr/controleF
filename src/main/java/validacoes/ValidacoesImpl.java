@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import Constantes.MensagemErro;
 import dto.EnderecoDTO;
@@ -21,10 +22,7 @@ import exceptions.ValidacaoException;
 import repository.EnderecoRepository;
 import repository.UsuarioRepository;
 
-
-
-
-
+@Component
 public class ValidacoesImpl {
 
 	@Autowired
