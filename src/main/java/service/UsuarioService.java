@@ -18,4 +18,5 @@ public interface UsuarioService {
 
 	GerenciarUsuarioDTO alteraSenha(GerenciarUsuarioDTO gerenciarUsuarioDTO) throws ValidacaoException, ServicoException;
 
+    GerenciarUsuarioDTO gerenciarUsuarioFeign(GerenciarUsuarioDTO gerenciarUsuarioDTO) throws ValidacaoException, ServicoException;
 }

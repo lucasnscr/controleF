@@ -53,5 +53,11 @@ public class UsuarioResource {
 	    	GerenciarUsuarioDTO gereUsuarioDTO = usuarioService.alteraSenha(gerenciarUsuarioDTO);
 	    	return gereUsuarioDTO;
 	    }
+
+		@RequestMapping(value="/gerenciarUsuarioFeign", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	    public GerenciarUsuarioDTO gerenciaDadosUsuarioFeign(@RequestParam("gerenciarUsuarioDTO") GerenciarUsuarioDTO gerenciarUsuarioDTO) throws  ValidacaoException, ServicoException{
+	    	GerenciarUsuarioDTO gereUsuarioDTO = usuarioService.gerenciarUsuarioFeign(gerenciarUsuarioDTO);
+	    	return gereUsuarioDTO;
+		}
 	
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 
 import Constantes.MensagemErro;
 import dto.AlteraDadosUsuarioDTO;
@@ -17,7 +18,6 @@ import entity.Usuario;
 import enums.FlagAtivo;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
-import org.springframework.test.annotation.Rollback;
 import repository.CentroGastosRepository;
 import repository.UsuarioRepository;
 import service.UsuarioService;
@@ -25,8 +25,7 @@ import validacoes.ValidacoesImpl;
 
 /**
  * 
- * @author ldnascimento
- * Incluir usuário e seu centro de gastos 
+ * @author ldnascimento Incluir usuário e seu centro de gastos
  */
 
 @Service
@@ -40,13 +39,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private CentroGastosRepository centroGastosRepository;
-	
+
 	@Override
-	@Rollback(value=true)
+	@Rollback(value = true)
 	public CadastroUsuarioDTO incluir(CadastroUsuarioDTO cadUsuarioDTO) throws ServicoException {
 		try {
 			Usuario usuario = new Usuario();
-			CentroGastos gastos =  new CentroGastos();
+			CentroGastos gastos = new CentroGastos();
 
 			validacoes.validaLogin(cadUsuarioDTO.getLogin());
 			validacoes.validaEmail(cadUsuarioDTO.getEmail(), cadUsuarioDTO.getEmailConfirmacao());
@@ -72,7 +71,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				gastos.setIdUsurio(usuCadastrado.getId());
 				gastos.setMêsAno(Date.from(Instant.now()));
 				CentroGastos centroGastos = centroGastosRepository.save(gastos);
-				if(centroGastos == null) {
+				if (centroGastos == null) {
 					throw new ValidacaoException(MensagemErro.ERRO_INSERIR.concat(MensagemErro.CENTRO_GASTOS));
 				}
 			}
@@ -209,6 +208,39 @@ public class UsuarioServiceImpl implements UsuarioService {
 				}
 			} else {
 				throw new ValidacaoException(MensagemErro.BUSCA_NAO_TEVE_RESULTADO);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public GerenciarUsuarioDTO gerenciarUsuarioFeign(GerenciarUsuarioDTO gerenciarUsuarioDTO)
+			throws ValidacaoException, ServicoException {
+		try {
+			String acaoFeign = gerenciarUsuarioDTO.getAcaoFeign();
+			GerenciarUsuarioDTO feignUsuario = null;
+			if ("".equals(acaoFeign) || acaoFeign.equals(null)) {
+				throw new ValidacaoException(MensagemErro.USUARIO);
+			} else {
+				switch (acaoFeign) {
+				case "inativar":
+					feignUsuario = inativar(gerenciarUsuarioDTO.getId());
+					break;
+
+				case "alteraEmail":
+					feignUsuario = alteraEmail(gerenciarUsuarioDTO);
+					break;
+					
+				case "alteraSenha":
+					feignUsuario = alteraSenha(gerenciarUsuarioDTO);
+					break;
+					
+				default:
+					break;
+				}
+				return feignUsuario;
 			}
 		} catch (Exception e) {
 			e.getMessage();

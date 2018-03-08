@@ -25,6 +25,8 @@ public class GerenciarUsuarioDTO implements Serializable {
 	
 	private String confirmaSenhaNovo;
 
+	private String acaoFeign;
+	
 	public long getId() {
 		return id;
 	}
@@ -95,6 +97,14 @@ public class GerenciarUsuarioDTO implements Serializable {
 
 	public void setConfirmaSenhaNovo(String confirmaSenhaNovo) {
 		this.confirmaSenhaNovo = confirmaSenhaNovo;
+	}
+
+	public String getAcaoFeign() {
+		return acaoFeign;
+	}
+
+	public void setAcaoFeign(String acaoFeign) {
+		this.acaoFeign = acaoFeign;
 	}
 	
 }
