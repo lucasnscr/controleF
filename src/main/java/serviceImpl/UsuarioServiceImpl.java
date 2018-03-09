@@ -228,17 +228,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 				case "inativar":
 					feignUsuario = inativar(gerenciarUsuarioDTO.getId());
 					break;
-
 				case "alteraEmail":
 					feignUsuario = alteraEmail(gerenciarUsuarioDTO);
 					break;
-					
 				case "alteraSenha":
 					feignUsuario = alteraSenha(gerenciarUsuarioDTO);
 					break;
-					
 				default:
-					break;
+					throw new ValidacaoException(MensagemErro.ERRO_FEIGN);
 				}
 				return feignUsuario;
 			}

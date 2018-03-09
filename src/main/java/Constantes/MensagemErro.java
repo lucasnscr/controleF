@@ -10,6 +10,8 @@ public class MensagemErro {
 	public static final String ERRO_INATIVAR = "Erro ao inativar ";
 	public static final String ERRO_TESTE = "Erro no teste unitário do ";
 	
+
+	public static final String ERRO_FEIGN = "Erro na escolha de opção do feign";
 	
 	/**
 	 * ENDERECO
