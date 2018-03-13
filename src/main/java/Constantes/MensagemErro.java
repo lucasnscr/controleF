@@ -95,5 +95,5 @@ public class MensagemErro {
 
 	public static final String CENTRO_GASTOS = "Centro de Gastos";
 	public static final String USUARIO_CENTRO_GASTOS = "Usuário sem centro de gastos cadastrado";
-	
+	public static final String CENTRO_GASTOS_INVALIDO = "Centro de gastos não encontrado";
 }

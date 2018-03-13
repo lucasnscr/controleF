@@ -11,10 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Constantes.MensagemErro;
+import dto.AnaliseCentroGastosDTO;
 import dto.CentroGastosDTO;
 import dto.LancamentoDTO;
 import entity.CentroGastos;
@@ -90,7 +92,7 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 								centroGastosDTO.setRecebimento(valorCredito);
 								lancamentoDTO.setTipoLancamento(TipoLancamento.CREDITO);
 								lancamentoDTO.setValor(lancamento.getValor());
-								
+
 								String valor = lancamento.getTipoRecebimento();
 								switch (valor) {
 								case "Salário":
@@ -108,13 +110,13 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 								}
 
 							} else {
-								valorDebito =+ lancamento.getValor();
+								valorDebito = +lancamento.getValor();
 								centroGastosDTO.setPagamento(valorDebito);
 								lancamentoDTO.setTipoLancamento(TipoLancamento.DEBITO);
 								lancamentoDTO.setValor(lancamento.getValor());
-								
+
 								String valor = lancamento.getTipoGasto();
-								
+
 								switch (valor) {
 								case "Moradia":
 									lancamentoDTO.setTipoGastos(TipoGastos.MORADIA);
@@ -147,7 +149,7 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 				centroGastosDTO.setLancamentoList(lancamentoDTOArrayList);
 
 				return centroGastosDTO;
-			}else {
+			} else {
 				throw new ValidacaoException(MensagemErro.USUARIO_CENTRO_GASTOS);
 			}
 		} catch (Exception e) {
@@ -160,4 +162,64 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 		Instant instant = Instant.ofEpochMilli(d.getTime());
 		return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
 	}
+
+	@Override
+	public AnaliseCentroGastosDTO analiseCentroGastos(Long idCentroGastos) throws ValidacaoException, ServicoException {
+
+		try {
+
+			CentroGastos centroGastos = centroGastosRepository.findById(idCentroGastos);
+
+			if (centroGastos != null) {
+
+				AnaliseCentroGastosDTO analise = new AnaliseCentroGastosDTO();
+
+				List<Lancamento> lancamentos = centroGastos.getLancamentos();
+				
+				Double valorReceita = 0.0;
+				Double valorDebito = 0.0;
+				Integer qtdDespesa = 0;
+				Integer qtdReceita = 0;
+				
+				for (Lancamento lancamento : lancamentos) {
+					String tipoLancamento = lancamento.getTipoLancamento();
+
+					if (StringUtils.isBlank(tipoLancamento)) {
+						throw new ValidacaoException(MensagemErro.ERRO_INFORME_TIPO_LANCAMENTO);
+					}
+
+					if (lancamento.getTipoGasto().equals(TipoLancamento.CREDITO.valor)) {
+						qtdReceita++;
+						valorReceita =+ lancamento.getValor();
+
+					} else if (lancamento.getTipoGasto().equals(TipoLancamento.DEBITO.valor)) {
+						qtdDespesa++;
+						valorDebito =+ lancamento.getValor();
+
+					}
+
+				}
+				
+				Double valorMedioReceita = calcularMedia(valorReceita, qtdReceita);
+				Double valorMedioDespesa = calcularMedia(valorDebito, qtdDespesa);
+				
+				analise.setValorMedioReceita(valorMedioReceita);
+				analise.setValorMedioDespesa(valorMedioDespesa);
+				
+				return analise;
+
+			} else {
+				throw new ServicoException(MensagemErro.CENTRO_GASTOS_INVALIDO);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+		return null;
+	}
+	
+	private Double calcularMedia(Double valor, Integer qtd) {
+		return valor/qtd;
+	}
+
 }
