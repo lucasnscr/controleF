@@ -132,6 +132,11 @@
 			<artifactId>spring-data-elasticsearch</artifactId>
 			<version>2.1.9.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.295</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
