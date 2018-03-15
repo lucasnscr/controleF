@@ -8,6 +8,7 @@ import org.elasticsearch.client.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,9 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import dto.LancamentoESDTO;
 import enums.FlagAtivo;
 import enums.TipoLancamento;
+import factoryConnection.ConnectionES;
+import factoryConnection.S3Connection;
+import service.S3Service;
 import serviceImpl.LancamentoESServiceImpl;
 
 @SpringBootApplication
@@ -28,8 +32,23 @@ public class ControleFApplication implements CommandLineRunner{
 
     @Autowired
     private LancamentoESServiceImpl lancamentoService;
+    
+    @Autowired
+	S3Service s3Service;
 	
-	public static void main(String[] args) {
+	@Value("${jsa.s3.uploadfile}")
+	private String uploadFilePath;
+	
+	@Value("${jsa.s3.key}")
+	private String downloadKey;
+	
+	public static void main(String[] args) throws Exception {
+		ConnectionES elastic =  new ConnectionES();
+		elastic.client();
+		
+		S3Connection s3 = new S3Connection();
+		s3.s3client();
+		
 		SpringApplication.run(ControleFApplication.class, args);
 	}
 
@@ -49,7 +68,15 @@ public class ControleFApplication implements CommandLineRunner{
 	        lancamento.setAtivo(FlagAtivo.ATIVO);
 	        
 	        lancamentoService.incluir(lancamento);
-
+	        
+	        /*
+	         * AWS Amazon S3
+	         */
+	        
+			System.out.println("---------------- START UPLOAD FILE ----------------");
+			s3Service.uploadFile("lucasApresentacao.pdf", uploadFilePath);
+			System.out.println("---------------- START DOWNLOAD FILE ----------------");
+			s3Service.downloadFile(downloadKey);
 	    }
 
 	    //useful for debug, print elastic search details
@@ -64,5 +91,8 @@ public class ControleFApplication implements CommandLineRunner{
 	        });
 	        System.out.println("--ElasticSearch--");
 	    }
-	
+
+	    
+	    
+	    
 }
