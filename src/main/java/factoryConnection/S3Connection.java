@@ -21,10 +21,10 @@ public class S3Connection {
 	private Logger logger = LoggerFactory.getLogger(S3ServiceImpl.class);
 	
 	@Value("${jsa.aws.access_key_id}")
-	private static final String awsId = "AKIAIVSU677M6D7U2HMQ";
+	private static final String awsId = "";
 
 	@Value("${jsa.aws.secret_access_key}")
-	private static final String awsKey = "6yx2itO/ywhWGFIzD9cIdmJpnmaiG3Gc9TtU4h7m";
+	private static final String awsKey = "";
 
 	@Value("${jsa.s3.region}")
 	private String region;
