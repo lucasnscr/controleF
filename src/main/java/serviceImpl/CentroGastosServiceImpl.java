@@ -15,6 +15,14 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import com.sendgrid.Mail;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+
 import Constantes.MensagemErro;
 import dto.AnaliseCentroGastosDTO;
 import dto.CentroGastosDTO;
@@ -44,6 +52,8 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 
 	@Autowired
 	private ValidacoesImpl validacao;
+
+	private static final String emailControleF = "l.nascimento.scr@gmail.com";
 
 	@Override
 	public CentroGastosDTO pesquisarCentroGastosUsuario(Long idUsuario) throws ValidacaoException, ServicoException {
@@ -175,12 +185,12 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 				AnaliseCentroGastosDTO analise = new AnaliseCentroGastosDTO();
 
 				List<Lancamento> lancamentos = centroGastos.getLancamentos();
-				
+
 				Double valorReceita = 0.0;
 				Double valorDebito = 0.0;
 				Integer qtdDespesa = 0;
 				Integer qtdReceita = 0;
-				
+
 				for (Lancamento lancamento : lancamentos) {
 					String tipoLancamento = lancamento.getTipoLancamento();
 
@@ -190,22 +200,22 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 
 					if (lancamento.getTipoGasto().equals(TipoLancamento.CREDITO.valor)) {
 						qtdReceita++;
-						valorReceita =+ lancamento.getValor();
+						valorReceita = +lancamento.getValor();
 
 					} else if (lancamento.getTipoGasto().equals(TipoLancamento.DEBITO.valor)) {
 						qtdDespesa++;
-						valorDebito =+ lancamento.getValor();
+						valorDebito = +lancamento.getValor();
 
 					}
 
 				}
-				
+
 				Double valorMedioReceita = calcularMedia(valorReceita, qtdReceita);
 				Double valorMedioDespesa = calcularMedia(valorDebito, qtdDespesa);
-				
+
 				analise.setValorMedioReceita(valorMedioReceita);
 				analise.setValorMedioDespesa(valorMedioDespesa);
-				
+
 				return analise;
 
 			} else {
@@ -217,9 +227,64 @@ public class CentroGastosServiceImpl implements CentroGastosService {
 
 		return null;
 	}
-	
+
 	private Double calcularMedia(Double valor, Integer qtd) {
-		return valor/qtd;
+		return valor / qtd;
+	}
+
+	@Override
+	public Integer enviarEmail(CentroGastosDTO centroGastosDTO) {
+		try {
+			Long id = centroGastosDTO.getId();
+			CentroGastos centroGastos = centroGastosRepository.findByIdUsuario(id);
+			if (centroGastos != null) {
+				Long idUsurio = centroGastos.getIdUsurio();
+				Usuario usuario = validacao.validaUsuario(idUsurio);
+				if (usuario != null) {
+					String emailCliente = usuario.getEmail();
+					if (!StringUtils.isBlank(emailCliente)) {
+						AnaliseCentroGastosDTO analiseCentroGastos = analiseCentroGastos(id);
+						
+						Double valorMedioDespesa = analiseCentroGastos.getValorMedioDespesa();
+						Double valorMedioReceita = analiseCentroGastos.getValorMedioReceita();
+						
+						String valorDespesaEmail = String.valueOf(valorMedioDespesa);
+						String valorReceitaEmail = String.valueOf(valorMedioReceita);
+
+						Email from = new Email(emailControleF);
+						String subject = "Centro de Gastos";
+						Email to = new Email(emailCliente);
+						Content content = new Content("A receita média foi de: " + valorReceitaEmail, "\n" + "A despesa média foi de: " + valorDespesaEmail);
+						Mail mail = new Mail(from, subject, to, content);
+						
+						
+						SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+						
+						Request request = new Request();
+						request.setMethod(Method.POST);
+						request.setEndpoint("mail/send");
+						request.setBody(mail.build());
+						Response response = sg.api(request);
+						System.out.println(response.getStatusCode());
+						System.out.println(response.getBody());
+						System.out.println(response.getHeaders());
+						
+						return response.getStatusCode();
+					} else {
+						throw new ValidacaoException(MensagemErro.EMAIL_NAO_INFORMADO);
+					}
+
+				} else {
+					throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INEXISTENTE);
+				}
+
+			} else {
+				throw new ValidacaoException(MensagemErro.CENTRO_GASTOS_INVALIDO);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
 	}
 
 }

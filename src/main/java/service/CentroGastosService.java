@@ -9,4 +9,6 @@ public interface CentroGastosService {
 
 	CentroGastosDTO pesquisarCentroGastosUsuario(Long idUsuario) throws ValidacaoException, ServicoException;
 	AnaliseCentroGastosDTO analiseCentroGastos(Long idCentroGastos) throws ValidacaoException, ServicoException;
+	Integer enviarEmail(CentroGastosDTO centroGastosDTO);
+	
 }
