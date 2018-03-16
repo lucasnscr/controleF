@@ -32,6 +32,7 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
   <li>Swagger</li>
   <li>Elasticsearch</li>
   <li>AWS{S3}</li>
+  <li>Sendgrid</li>
 </ul>
 
 ## Testes
