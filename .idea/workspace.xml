@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50c7ca0b-a3c8-44a0-991b-5c51aeaa1240" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_http_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_0_27_Final.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hdrhistogram_HdrHistogram_2_1_9.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/demo.iml" afterPath="$PROJECT_DIR$/demo.iml" />
-    </list>
+    <list default="true" id="50c7ca0b-a3c8-44a0-991b-5c51aeaa1240" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -262,7 +252,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="697" />
     <option name="height" value="735" />
@@ -416,8 +406,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -628,7 +617,7 @@
         <state relative-caret-position="578">
           <caret line="63" column="46" lean-forward="false" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
