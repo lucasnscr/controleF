@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,7 @@ public class ValidacoesImpl {
 
 	public void validaLogin(String login) throws ValidacaoException {
 		try {
-			if (!"".equals(login)) {
+			if (StringUtils.isNotBlank(login)) {
 				Usuario usuario = usuarioRepository.findByLogin(login);
 				if (usuario != null) {
 					throw new ValidacaoException(MensagemErro.USER_JA_EXISTENTE);
@@ -48,13 +49,13 @@ public class ValidacoesImpl {
 
 	public void validaEmail(String email, String confirmacaoEmail) throws ValidacaoException {
 		try {
-			if (!"".equals(email)) {
+			if (StringUtils.isNotBlank(email)) {
 				Usuario usuario = usuarioRepository.findByEmail(email);
 				if (usuario != null) {
 					throw new ValidacaoException(MensagemErro.EMAIL_JA_CADASTRADO);
 				} else {
-					if (!"".equals(confirmacaoEmail)) {
-						if (!confirmacaoEmail.equals(email)) {
+					if (StringUtils.isNotBlank(confirmacaoEmail)) {
+						if (!StringUtils.equals(email, confirmacaoEmail)) {
 							throw new ValidacaoException(MensagemErro.CONFIRMACAO_DE_EMAIL_INVALIDA);
 						}
 					} else {
@@ -71,11 +72,11 @@ public class ValidacoesImpl {
 
 	public void validaSenha(String senha, String confirmaSenha) throws ValidacaoException {
 		try {
-			if (!"".equals(senha)) {
+			if (StringUtils.isNotBlank(senha)) {
 				if (senha.length() <= 5 && senha.length() >= 13) {
 					throw new ValidacaoException(MensagemErro.TAMANHO_DE_SENHA_INVALIDO);
 				}
-				if (!confirmaSenha.equals(senha)) {
+				if (!StringUtils.equals(senha, confirmaSenha)) {
 					throw new ValidacaoException(MensagemErro.ERRO_CONFIRMA_SENHA);
 				}
 			} else {
@@ -140,7 +141,6 @@ public class ValidacoesImpl {
 			if (escolaridade.getValor() > 10 && escolaridade.getValor() < 1) {
 				throw new ValidacaoException(MensagemErro.ESCOLARIDADE_INVALIDA);
 			}
-
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -149,8 +149,8 @@ public class ValidacoesImpl {
 	public void validaEndereco(EnderecoDTO endercoDTO) throws ValidacaoException, ServicoException {
 
 		try {
-			if ("".equals(endercoDTO.getLogradouro()) || "".equals(endercoDTO.getBairro())
-					|| "".equals(endercoDTO.getCidade()) || "".equals(endercoDTO.getPais())) {
+			if (StringUtils.isBlank(endercoDTO.getLogradouro()) || StringUtils.isBlank(endercoDTO.getBairro())
+					|| StringUtils.isBlank(endercoDTO.getCidade()) || StringUtils.isBlank(endercoDTO.getPais())) {
 				throw new ValidacaoException(MensagemErro.ERRO_ENDERECO_DADOS);
 			}
 
@@ -173,25 +173,17 @@ public class ValidacoesImpl {
 
 	public void validaTelefone(TelefoneDTO telefoneDTO) throws ValidacaoException {
 		try {
-			if (null == telefoneDTO.getUsuario().getId()) {
-				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_USUARIO);
-
-			}
-
 			if (null == telefoneDTO.getCodigoPais()) {
 				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_CODIGO_PAIS);
-
 			}
 
-			if (null == telefoneDTO.getDdd() && telefoneDTO.getDdd() < 2) {
+			if (null == telefoneDTO.getDdd() || telefoneDTO.getDdd() < 2) {
 				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_DDD);
-
 			}
 
 			if (null == telefoneDTO.getUsuario() && telefoneDTO.getNumero() < 6) {
 				throw new ValidacaoException(MensagemErro.ERRO_TELEFONE_USUARIO);
 			}
-
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -199,22 +191,17 @@ public class ValidacoesImpl {
 
 	public void validaMeta(MetaDTO metaDTO) throws ValidacaoException {
 		try {
-			if (metaDTO.getUsuario().getId() != null) {
+			if (metaDTO.getUsuario().getId() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_META);
 			}
 
-			if (metaDTO.getDataInicio() != null) {
+			if (metaDTO.getDataInicio() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_DT_INICIO_META);
 			}
 
-			if (metaDTO.getDataFinal() != null) {
+			if (metaDTO.getDataFinal() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_DT_FIM_META);
 			}
-
-			if (metaDTO.getValor() != null) {
-				throw new ValidacaoException(MensagemErro.ERRO_VALOR_META);
-			}
-
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -235,11 +222,11 @@ public class ValidacoesImpl {
 			if (investimentoDTO.getUsuario().getId() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_USUARIO_INVESTIMENTO);
 			}
-			
+
 			if (investimentoDTO.getValor() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_VALOR_INVESTIMENTO);
 			}
-			
+
 			if (investimentoDTO.getFim() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_DATA_FIM_INVESTIMENTO);
 			}
@@ -251,23 +238,13 @@ public class ValidacoesImpl {
 
 	public void validaLancamento(LancamentoDTO lancamentoDTO) throws ValidacaoException {
 		try {
-			if(lancamentoDTO.getTipoLancamento() == null) {
+			if (lancamentoDTO.getTipoLancamento() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_INFORME_TIPO_LANCAMENTO);
 			}
-			if(lancamentoDTO.getValor() == null) {
+			if (lancamentoDTO.getValor() == null) {
 				throw new ValidacaoException(MensagemErro.ERRO_INFORME_TIPO_LANCAMENTO);
 			}
-			
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
-	
-	public void validaDataAnaliseLancamento(Date inicio, Date fim) throws ValidacaoException{
-		try {
-			if(inicio != null && fim == null) {
-				throw new ValidacaoException(MensagemErro.ANALISE_LANCAMENTO_DATA_FIM);
-			}
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
