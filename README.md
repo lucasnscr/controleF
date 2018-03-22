@@ -46,7 +46,5 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
 
 ## Build Status
 
-https://img.shields.io/travis/USER/REPO.svg
-
-
+<img src="https://img.shields.io/travis/USER/REPO.svg" alt="BuildStatus" />
 </p>
