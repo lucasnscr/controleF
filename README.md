@@ -43,8 +43,6 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
   <li>Mockito</li>
 </ul>
 
+** Desenvolvimento
 
-## Build Status
-
-<img src="https://img.shields.io/travis/USER/REPO.svg" alt="BuildStatus" />
 </p>
