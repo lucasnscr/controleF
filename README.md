@@ -4,7 +4,7 @@
 
  
 O crontroleF tem como finalidade, auxiliar o seu centro de custo, tendo você controle maior de todos os seus gastos.
-Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim você tem um saldo mensal, e diante disso saber onde estão suas fontes maiores de gastos de ativos e passivos. 
+Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim você tem um saldo mensal, e diante disso saber onde estão suas fontes maiores de ativos e passivos. 
 
 
  ## Funcionalidades
