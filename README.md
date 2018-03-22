@@ -42,7 +42,8 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
   <li>Junit</li>
   <li>Mockito</li>
 </ul>
-
-** Desenvolvimento
-
 </p>
+
+**Desenvolvimento
+
+Desenvolvido by lucasnscr
