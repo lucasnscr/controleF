@@ -91,8 +91,11 @@ public class ControleFApplication implements CommandLineRunner{
 	        });
 	        System.out.println("--ElasticSearch--");
 	    }
-
-	    
-	    
-	    
+	
+	@Primary
+	@Bean
+	@ConfigurationProperties(prefix="spring.datasource")
+	public DataSource dataSource(){
+		return DataSourceBuilder.create().build();
+	}       
 }
