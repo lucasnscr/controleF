@@ -2,7 +2,6 @@ package resource;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,44 +13,45 @@ import dto.TelefoneDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import io.swagger.annotations.Api;
-import service.TelefoneService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value= "")
 @RestController
 @RequestMapping("/telefone")
-public class TelefoneResource {
+public interface TelefoneResource {
 
-	@Autowired
-	private TelefoneService telefoneService;
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Ok"),
+			@ApiResponse(code = 400, message="Bad Request"),
+			@ApiResponse(code = 404, message="Not Found"),
+			@ApiResponse(code = 500, message="Internal Server Error")
+	})
 	
+	@ApiOperation(value = "Serviço que insere um telefone")
+	@ApiResponse(code= 200, message="insert realizado com sucesso")
 	@RequestMapping(value="/", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-    public TelefoneDTO insert(@RequestParam("telefoneDTO") TelefoneDTO telefoneDTO)  throws ValidacaoException, ServicoException {
-		TelefoneDTO endDTO = telefoneService.incluir(telefoneDTO);
-        return endDTO;
-    }
+    public TelefoneDTO insert(@RequestParam("telefoneDTO") TelefoneDTO telefoneDTO)  throws ValidacaoException, ServicoException;
 
+	@ApiOperation(value = "Serviço que altera um telefone")
+	@ApiResponse(code= 200, message="update realizado com sucesso")
     @RequestMapping(value="/alterar", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-    public TelefoneDTO alterar (@RequestParam("telefoneDTO") TelefoneDTO telefoneDTO)  throws ValidacaoException, ServicoException {
-    	TelefoneDTO endDTO = telefoneService.alterar(telefoneDTO);
-        return endDTO;
-    }
+    public TelefoneDTO alterar (@RequestParam("telefoneDTO") TelefoneDTO telefoneDTO)  throws ValidacaoException, ServicoException;
 
+	@ApiOperation(value = "Serviço que inativa um telefone")
+	@ApiResponse(code= 200, message="inativacao realizado com sucesso")
     @RequestMapping(value="/inativar/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public TelefoneDTO inativar(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException{
-    	TelefoneDTO endDTO = telefoneService.inativar(id);
-    	return endDTO;
-    }
+    public TelefoneDTO inativar(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que lista telefones de um usuario")
+	@ApiResponse(code= 200, message="pesquisa realizado com sucesso")
     @RequestMapping(value="/listaTelefone/{idUsuario}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public List<TelefoneDTO> listarTelefoneUsuario(@PathVariable("idUsuario") Long idUsuario)  throws ValidacaoException, ServicoException{
-    	List<TelefoneDTO> endDTOList = telefoneService.listarTelefoneUsuario(idUsuario);
-    	return endDTOList;
-    }
+    public List<TelefoneDTO> listarTelefoneUsuario(@PathVariable("idUsuario") Long idUsuario)  throws ValidacaoException, ServicoException;
     
+	@ApiOperation(value = "Serviço que detalhe telefone")
+	@ApiResponse(code= 200, message="pesquisa realizado com sucesso")
     @RequestMapping(value="/detalheTelefone/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public TelefoneDTO detalharTelefone(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException{
-    	TelefoneDTO endDTO = telefoneService.detalharTelefone(id);
-    	return endDTO;
-    }
+    public TelefoneDTO detalharTelefone(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException;
 	
 }

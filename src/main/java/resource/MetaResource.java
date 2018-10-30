@@ -2,7 +2,6 @@ package resource;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,44 +13,45 @@ import dto.MetaDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import io.swagger.annotations.Api;
-import service.MetaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value="ControleF - Meta")
 @RestController
 @RequestMapping("/meta")
-public class MetaResource {
-
-	@Autowired
-	private MetaService metaService;
+public interface MetaResource {
 	
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Ok"),
+			@ApiResponse(code = 400, message="Bad Request"),
+			@ApiResponse(code = 404, message="Not Found"),
+			@ApiResponse(code = 500, message="Internal Server Error")
+	})
+	
+	@ApiOperation(value = "Serviço que insere uma meta")
+	@ApiResponse(code= 200, message="insert realizado com sucesso")
 	@RequestMapping(value="/", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public MetaDTO incluir(@RequestParam("metaDTO") MetaDTO metaDTO) throws ValidacaoException, ServicoException {
-		MetaDTO meta = metaService.incluir(metaDTO);
-		return meta;
-	}
+	MetaDTO incluir(@RequestParam("metaDTO") MetaDTO metaDTO) throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que altera uma meta")
+	@ApiResponse(code= 200, message="update realizado com sucesso")
 	@RequestMapping(value="/alterar", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public MetaDTO alterar(@RequestParam("metaDTO") MetaDTO metaDTO) throws ValidacaoException, ServicoException {
-		MetaDTO meta = metaService.alterar(metaDTO);
-		return meta;
-	}
+	MetaDTO alterar(@RequestParam("metaDTO") MetaDTO metaDTO) throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que inativa uma meta")
+	@ApiResponse(code= 200, message="inativacao realizado com sucesso")
 	@RequestMapping(value="/inativar/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public MetaDTO inativar(@PathVariable("id") Long id) throws ValidacaoException, ServicoException {
-		MetaDTO meta = metaService.inativar(id);
-		return meta;
-	}
+	MetaDTO inativar(@PathVariable("id") Long id) throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que pequisa metas de um usuario")
+	@ApiResponse(code= 200, message="pesquisa realizado com sucesso")
 	@RequestMapping(value="/pesquisaMeta/{idUsuario}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<MetaDTO> pesquisarMeta(@PathVariable("idUsuario")  Long idUsuario) throws ValidacaoException, ServicoException {
-		List<MetaDTO> metas = metaService.pesquisarMeta(idUsuario);
-		return metas;
-	}
+	List<MetaDTO> pesquisarMeta(@PathVariable("idUsuario")  Long idUsuario) throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que detalha uma meta")
+	@ApiResponse(code= 200, message="pesquisa realizado com sucesso")
 	@RequestMapping(value="/pesquisaMeta/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public MetaDTO detalheMeta(@PathVariable("id") Long id) throws ValidacaoException, ServicoException {
-		MetaDTO meta = metaService.detalheMeta(id);
-		return meta;
-	}
+	MetaDTO detalheMeta(@PathVariable("id") Long id) throws ValidacaoException, ServicoException;
 	
 }

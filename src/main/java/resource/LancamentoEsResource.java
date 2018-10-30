@@ -2,7 +2,6 @@ package resource;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,38 +13,43 @@ import dto.LancamentoESDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import io.swagger.annotations.Api;
-import service.LancamentoESService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value = "ControleF -  Lancamento BigData")
 @RestController
 @RequestMapping("/lancamentoEs")
-public class LancamentoEsResource {
+public interface LancamentoEsResource {
+	
 
-	@Autowired
-	private LancamentoESService lancamentoESService;
-
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Ok"),
+			@ApiResponse(code = 400, message="Bad Request"),
+			@ApiResponse(code = 404, message="Not Found"),
+			@ApiResponse(code = 500, message="Internal Server Error")
+	})
+	 
+	@ApiOperation(value = "Serviço que insere um investimento no bigdata")
+	@ApiResponse(code= 200, message="insert realizado com sucesso")
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Long incluir(@RequestParam("lancamentoDTO") LancamentoESDTO lancamentoDTO)
-			throws ServicoException, ValidacaoException {
-		Long id = lancamentoESService.incluir(lancamentoDTO);
-		return id;
-	}
+	Long incluir(@RequestParam("lancamentoDTO") LancamentoESDTO lancamentoDTO)
+			throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que inativa um investimento no bigdata")
+	@ApiResponse(code= 200, message="inativação realizado com sucesso")
 	@RequestMapping(value = "/excluir/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean inativar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException {
-		Boolean excluir = lancamentoESService.excluir(id);
-		return excluir;
-	}
-
+	Boolean inativar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException ;
+	
+	@ApiOperation(value = "Serviço que detalhe um investimento no bigdata")
+	@ApiResponse(code= 200, message="busca realizado com sucesso")
 	@RequestMapping(value = "/detalheES/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public LancamentoESDTO detalharLancamento(@PathVariable("id") Long id) throws ServicoException, ValidacaoException {
-		LancamentoESDTO lancDTO = lancamentoESService.buscaPorId(id);
-		return lancDTO;
-	}
+	LancamentoESDTO detalharLancamento(@PathVariable("id") Long id) throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que lista investimentos um investimento no bigdata")
+	@ApiResponse(code= 200, message="busca realizado com sucesso")
 	@RequestMapping(value = "/listar", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<LancamentoESDTO> listar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException {
-		List<LancamentoESDTO> lancDTOList = lancamentoESService.buscarTodos();
-		return lancDTOList;
-	}
+	List<LancamentoESDTO> listar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException;
+	
+	
 }

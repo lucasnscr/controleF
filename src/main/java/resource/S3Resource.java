@@ -1,6 +1,5 @@
 package resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,28 +13,32 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 
 import io.swagger.annotations.Api;
-import service.S3Service;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value= "ControleF - Planilhas de gasto")
 @RestController
 @RequestMapping("/s3")
-public class S3Resource {
+public interface S3Resource {
 
-	@Autowired
-	private S3Service s3Service;
 
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Ok"),
+			@ApiResponse(code = 400, message="Bad Request"),
+			@ApiResponse(code = 404, message="Not Found"),
+			@ApiResponse(code = 500, message="Internal Server Error")
+	})
+	
+	@ApiOperation(value = "Serviço que insere uma planilha")
+	@ApiResponse(code= 200, message="upload realizado com sucesso")
 	@RequestMapping(value="/upload", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public PutObjectResult upload(PutObjectRequest putObjectRequest)
-			throws SdkClientException, AmazonServiceException {
-		PutObjectResult uploadFile = s3Service.uploadFile(putObjectRequest.getBucketName(), putObjectRequest.getFile().getAbsolutePath());
-		return uploadFile;
+			throws SdkClientException, AmazonServiceException;
 
-	}
-
+	@ApiOperation(value = "Serviço que baixa uma planilha inserida")
+	@ApiResponse(code= 200, message="download realizado com sucesso")
 	@RequestMapping(value="/download", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public S3Object download(GetObjectRequest getObjectRequest) throws SdkClientException, AmazonServiceException {
-		S3Object downloadFile = s3Service.downloadFile(getObjectRequest.getKey());
-		return downloadFile;
-	}
+	public S3Object download(GetObjectRequest getObjectRequest) throws SdkClientException, AmazonServiceException;
 
 }

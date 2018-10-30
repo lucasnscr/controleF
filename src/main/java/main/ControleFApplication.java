@@ -12,7 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+
+import com.amazonaws.services.opsworks.model.DataSource;
 
 import dto.LancamentoESDTO;
 import enums.FlagAtivo;
@@ -96,6 +102,6 @@ public class ControleFApplication implements CommandLineRunner{
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource")
 	public DataSource dataSource(){
-		return DataSourceBuilder.create().build();
+		return (DataSource) DataSourceBuilder.create().build();
 	}       
 }

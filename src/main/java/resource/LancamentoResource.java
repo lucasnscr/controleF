@@ -1,6 +1,5 @@
 package resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,47 +12,48 @@ import dto.LancamentoDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import io.swagger.annotations.Api;
-import service.LancamentoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value= "ControleF - lancamentos de entradas e saidas")
 @RestController
 @RequestMapping("/lancamento")
-public class LancamentoResource {
+public interface LancamentoResource {
 
-	@Autowired
-	private LancamentoService lancamentoService;
-
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Ok"),
+			@ApiResponse(code = 400, message="Bad Request"),
+			@ApiResponse(code = 404, message="Not Found"),
+			@ApiResponse(code = 500, message="Internal Server Error")
+	})
+	
+	@ApiOperation(value = "Serviço que insere um lancamento")
+	@ApiResponse(code= 200, message="insert realizado com sucesso")
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Long incluir(@RequestParam("lancamentoDTO") LancamentoDTO lancamentoDTO)
-			throws ServicoException, ValidacaoException {
-		Long id = lancamentoService.incluir(lancamentoDTO);
-		return id;
-	}
+			throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que altera um lancamento")
+	@ApiResponse(code= 200, message="update realizado com sucesso")
 	@RequestMapping(value = "/alterar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public LancamentoDTO alterar(@RequestParam("lancamentoDTO") LancamentoDTO lancamentoDTO)
-			throws ServicoException, ValidacaoException {
-		LancamentoDTO lancDTO = lancamentoService.alterar(lancamentoDTO);
-		return lancDTO;
-	}
+			throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que inativa um lancamento")
+	@ApiResponse(code= 200, message="inativacao realizado com sucesso")
 	@RequestMapping(value = "/inativar/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public LancamentoDTO inativar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException {
-		LancamentoDTO lancDTO = lancamentoService.inativar(id);
-		return lancDTO;
-	}
+	public LancamentoDTO inativar(@PathVariable("id") Long id) throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que pesquisa um lancamento")
+	@ApiResponse(code= 200, message="busca realizado com sucesso")
 	@RequestMapping(value = "/detalheLancamento/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public LancamentoDTO detalharLancamento(@PathVariable("id") Long id) throws ServicoException, ValidacaoException {
-		LancamentoDTO lancDTO = lancamentoService.detalharLancamento(id);
-		return lancDTO;
-	}
+	public LancamentoDTO detalharLancamento(@PathVariable("id") Long id) throws ServicoException, ValidacaoException;
 
+	@ApiOperation(value = "Serviço que analisa seus lancamentos um lancamento")
+	@ApiResponse(code= 200, message="analise realizado com sucesso")
 	@RequestMapping(value = "/analiseLancamento", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public AnaliseLancamentoDTO analiseLancamento(
 			@RequestParam("analiseLancamentoDTO") AnaliseLancamentoDTO analiseLancamentoDTO)
-			throws ServicoException, ValidacaoException {
-		AnaliseLancamentoDTO analiseLancamento = lancamentoService.analiseLancamento(analiseLancamentoDTO);
-		return analiseLancamento;
-	}
+			throws ServicoException, ValidacaoException;
 }

@@ -2,7 +2,6 @@ package resource;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,43 +13,45 @@ import dto.EnderecoDTO;
 import exceptions.ServicoException;
 import exceptions.ValidacaoException;
 import io.swagger.annotations.Api;
-import service.EnderecoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(tags="ControleF - Endereço")
 @RestController
 @RequestMapping("/endereco")
-public class EnderecoResource {
+public interface EnderecoResource {
 	
-	@Autowired
-	private EnderecoService enderecoService;
-	
+	 @ApiResponses(value = {
+				@ApiResponse(code = 200, message="Ok"),
+				@ApiResponse(code = 400, message="Bad Request"),
+				@ApiResponse(code = 404, message="Not Found"),
+				@ApiResponse(code = 500, message="Internal Server Error")
+		})
+		 
+	@ApiOperation(value = "Serviço que realiza cadastro de endereço")
+	@ApiResponse(code= 200, message="pesquisa realizada com sucesso")
 	@RequestMapping(value="/", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-    public EnderecoDTO insert(@RequestParam("enderecoDTO") EnderecoDTO enderecoDTO)  throws ValidacaoException, ServicoException {
-		EnderecoDTO endDTO = enderecoService.incluir(enderecoDTO);
-        return endDTO;
-    }
+    EnderecoDTO insert(@RequestParam("enderecoDTO") EnderecoDTO enderecoDTO)  throws ValidacaoException, ServicoException;
 
+	@ApiOperation(value = "erviço que realiza alteração de endereço")
+	@ApiResponse(code= 200, message="pesquisa realizada com sucesso")
     @RequestMapping(value="/alterar", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-    public EnderecoDTO alterar (@RequestParam("enderecoDTO") EnderecoDTO enderecoDTO)  throws ValidacaoException, ServicoException {
-    	EnderecoDTO endDTO = enderecoService.alterar(enderecoDTO);
-        return endDTO;
-    }
+    EnderecoDTO alterar (@RequestParam("enderecoDTO") EnderecoDTO enderecoDTO)  throws ValidacaoException, ServicoException; 
 
+	@ApiOperation(value = "erviço que inativa endereço")
+	@ApiResponse(code= 200, message="pesquisa realizada com sucesso")
     @RequestMapping(value="/inativar/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public EnderecoDTO inativar(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException{
-    	EnderecoDTO endDTO = enderecoService.inativar(id);
-    	return endDTO;
-    }
+    EnderecoDTO inativar(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException;
 	
+	@ApiOperation(value = "Serviço que lista endereços de um usuário")
+	@ApiResponse(code= 200, message="pesquisa realizada com sucesso")
     @RequestMapping(value="/listaEndereco/{idUsuario}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public List<EnderecoDTO> listarEnderecoUsuario(@PathVariable("idUsuario") Long idUsuario)  throws ValidacaoException, ServicoException{
-    	List<EnderecoDTO> endDTOList = enderecoService.listarEnderecoUsuario(idUsuario);
-    	return endDTOList;
-    }
+    List<EnderecoDTO> listarEnderecoUsuario(@PathVariable("idUsuario") Long idUsuario)  throws ValidacaoException, ServicoException;
     
+	@ApiOperation(value = "Serviço que realiza busca do endereço por id")
+	@ApiResponse(code= 200, message="pesquisa realizada com sucesso")
     @RequestMapping(value="/detalheEndereco/{id}", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public EnderecoDTO detalharEndereco(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException{
-    	EnderecoDTO endDTO = enderecoService.detalharEndereco(id);
-    	return endDTO;
-    }
+    EnderecoDTO detalharEndereco(@PathVariable("id") Long id)  throws ValidacaoException, ServicoException;
+    
 }
