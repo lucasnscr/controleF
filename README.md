@@ -20,7 +20,7 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
 
 
  <ul>
-  <li>Java9</li>
+  <li>Java8</li>
   <li>SpringBoot</li>
   <li>SpringCloud</li>
   <li>SpringData</li>
@@ -33,6 +33,8 @@ Você controla seus lançamentos, seja eles pagamentos e recebimentos, assim voc
   <li>Elasticsearch</li>
   <li>AWS{S3}</li>
   <li>Sendgrid</li>
+  <li>Maven</li>
+  <li>Docker</li>
 </ul>
 
 ## Testes
